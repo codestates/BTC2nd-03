@@ -1,0 +1,23 @@
+{
+  "name": "btc2nd-03-project-server",
+  "version": "0.0.1",
+  "description": "backend-server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "helmet": "^5.0.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.4",
+    "nunjucks": "^3.2.3",
+    "redis": "^4.0.4"
+  }
+}

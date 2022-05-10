@@ -8,7 +8,8 @@ module.exports = {
                     main: [env === 'development' &&
                     require.resolve('react-dev-utils/webpackHotDevClient'),paths.appIndexJs].filter(Boolean),
                     background: paths.appSrc + '/chrome/background.js',
-                    
+                    hello: paths.appSrc+ '/hello.js'
+
                 },
                 output: {
                     ...webpackConfig.output,
@@ -20,13 +21,12 @@ module.exports = {
                 },
                 plugins: [
                    ...webpackConfig.plugins,
-                //    new HtmlWebpackPlugin({
-                //     inject: true,
-                //     chunks: ["options"],
-                //     template: paths.appHtml,
-                //     filename: 'options.html',
-                        
-                //       }),
+                   new HtmlWebpackPlugin({
+                    inject: true,
+                    chunks: ["options"],
+                    template: paths.appSrc + '/hello.html',
+                    filename: 'hello.html',
+                    }),
                 ]
             }
         },

@@ -18,8 +18,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "dev": "webpack --watch --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js",
+    "build": "set INLINE_RUNTIME_CHUNK=false && craco build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

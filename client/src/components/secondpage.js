@@ -1,0 +1,67 @@
+import { Container, Grid, Typography, Paper, Box, Button } from "@mui/material";
+import { GetApp, Add } from "@mui/icons-material";
+
+const secondpage = () => {
+  return (
+    <Container style={{ marginTop: "2%" }}>
+      <img src="/logo_2.png" alt="no img" width="190px" height="60px" />
+      <Grid
+        container
+        spacing={5}
+        sx={{ justifyContent: "center", marginTop: "60px" }}
+      >
+        <Grid container sx={{ justifyContent: "center" }}>
+          <Typography variant="h5" component="p">
+            roly-poly가 처음이세요?
+          </Typography>
+        </Grid>
+        <Grid item xs={5}>
+          <Paper elevation={3} sx={{ borderRadius: "10px" }}>
+            <Box padding={5} sx={{ textAlign: "center" }}>
+              <GetApp />
+              <Typography variant="h6" component="p">
+                아니요. 이미 비밀 복구 구문이 있습니다.
+              </Typography>
+              <Box paddingTop={1} paddingBottom={5}>
+                <Typography variant="body2" component="p">
+                  비밀 복구 구문을 사용하여 기존 지갑 가져오기
+                </Typography>
+              </Box>
+              <Button
+                variant="contained"
+                size="large"
+                sx={{ borderRadius: "20px", width: "50%" }}
+              >
+                지갑 가져오기
+              </Button>
+            </Box>
+          </Paper>
+        </Grid>
+        <Grid item xs={5} sx={{ borderRadius: "10px" }}>
+          <Paper elevation={3} sx={{ borderRadius: "20px" }}>
+            <Box padding={5} sx={{ textAlign: "center" }}>
+              <Add />
+              <Typography variant="h6" component="p">
+                설정을 시작하죠!
+              </Typography>
+              <Box paddingTop={1} paddingBottom={5}>
+                <Typography variant="body2" component="p">
+                  지갑 생성을 하면 새 지갑과 비밀 복구 구문이 만들어집니다.
+                </Typography>
+              </Box>
+              <Button
+                variant="contained"
+                size="large"
+                sx={{ borderRadius: "20px", width: "50%" }}
+              >
+                지갑 생성
+              </Button>
+            </Box>
+          </Paper>
+        </Grid>
+      </Grid>
+    </Container>
+  );
+};
+
+export default secondpage;

@@ -8,7 +8,7 @@ module.exports = {
                     main: [env === 'development' &&
                     require.resolve('react-dev-utils/webpackHotDevClient'),paths.appIndexJs].filter(Boolean),
                     background: paths.appSrc + '/chrome/background.js',
-                    hello: paths.appSrc+ '/hello.js'
+                    popup: paths.appSrc+ '/popup.js'
 
                 },
                 output: {
@@ -24,8 +24,8 @@ module.exports = {
                    new HtmlWebpackPlugin({
                     inject: true,
                     chunks: ["options"],
-                    template: paths.appSrc + '/hello.html',
-                    filename: 'hello.html',
+                    template: paths.appSrc + '/popup.html',
+                    filename: 'popup.html',
                     }),
                 ]
             }

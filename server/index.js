@@ -6,8 +6,9 @@ const session = require('express-session');
 const dotenv = require('dotenv');
 
 dotenv.config();
-////const cors = require('cors');
+//const cors = require('cors');
 const serverRouter= require('./routes/route_handle');
+const walletRouter = require('./routes/wallet/index');
 
 const app = express();
 app.set('port', process.env.PORT ||5005);
@@ -29,13 +30,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(sessionMiddleware);
 
+// app.use(
+//   cors({
+//     origin: ['http://localhost:3000'],
+//     methods: ['GET', 'POST'],
+//     credentials: true
+//   })
+// );
+
 //app.use(cors());
 
 app.get('/',(req,res)=>
-{ res.send('Test : Server is working  !! <h1>You are Welcome !!</h1>');});
+{ res.send('Test : Server is working  !! <h1> Test Wallet </h1>');});
 
 
 app.use('/test',serverRouter);
+app.use('/wallet', walletRouter);
 
 app.use((req, res, next) => {
   const error =  new Error(`[APP] ${req.method} ${req.url} - no router.`);

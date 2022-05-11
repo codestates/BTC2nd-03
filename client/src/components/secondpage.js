@@ -58,13 +58,9 @@ const SecondPage = () => {
                 variant="contained"
                 size="large"
                 sx={{ borderRadius: "20px", width: "50%" }}
+                onClick={()=>navigate("/thirdpage")}
               >
-                <Link
-                  to="/thirdpage"
-                  style={{ textDecoration: "none", color: "white" }}
-                >
                   지갑 생성
-                </Link>
               </Button>
             </Box>
           </Paper>

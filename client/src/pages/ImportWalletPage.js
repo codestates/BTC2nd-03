@@ -18,6 +18,8 @@ const ImportWalletPage = () => {
     
     const onSubmit = async () => {
       const {data, status} = await createWallet(values);
+      const test = await createWallet(values);
+      console.log(test);
       if (status === 200) {
         const {data:keystore} = data;
         console.log(data);

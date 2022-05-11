@@ -1,8 +1,8 @@
 import { Container, Grid, Typography, Paper, Box, Button } from "@mui/material";
 import { GetApp, Add } from "@mui/icons-material";
-import { Link,useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const SecondPage = () => {
+const SelectPage = () => {
   const navigate = useNavigate();
   return (
     <Container style={{ marginTop: "2%" }}>
@@ -35,7 +35,7 @@ const SecondPage = () => {
                 variant="contained"
                 size="large"
                 sx={{ borderRadius: "20px", width: "50%" }}
-                onClick={()=>navigate('/import-with-seed-pharse')}
+                onClick={() => navigate("/import-with-seed-pharse")}
               >
                 지갑 가져오기
               </Button>
@@ -58,9 +58,9 @@ const SecondPage = () => {
                 variant="contained"
                 size="large"
                 sx={{ borderRadius: "20px", width: "50%" }}
-                onClick={()=>navigate("/thirdpage")}
+                onClick={() => navigate("/createwalletpage")}
               >
-                  지갑 생성
+                지갑 생성
               </Button>
             </Box>
           </Paper>
@@ -70,4 +70,4 @@ const SecondPage = () => {
   );
 };
 
-export default SecondPage;
+export default SelectPage;

@@ -2,13 +2,14 @@ import React from 'react';
 import { IconButton, OutlinedInput, InputLabel,Container,InputAdornment, Button, Stack, Typography, TextField,FormControl  } from "@mui/material";
 import {Visibility,VisibilityOff } from "@mui/icons-material";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {createWallet} from "../api/WalletApi";
 import {detect} from 'detect-browser';
 
 const ImportWalletPage = () => {
   const browserInfo = detect();
     const navigate = useNavigate();
+    const location = useLocation();
     const [values, setValues] = React.useState({
       mnemonic: '',
       password: '',
@@ -18,18 +19,13 @@ const ImportWalletPage = () => {
     
     const onSubmit = async () => {
       const {data, status} = await createWallet(values);
-      const test = await createWallet(values);
-      console.log(test);
       if (status === 200) {
-        const {data:keystore} = data;
-        console.log(data);
-        console.log(keystore);
+        const {data:walletInfo} = data;
+        console.log(walletInfo);
         console.log(browserInfo.name, browserInfo.type)
+        console.log(location);
         /*global chrome*/
-        //chrome.storage.local.set({"address":keystore},function(){ console.log("saved ok"); } );
-        if(browserInfo.type === "extentions") {
-          
-        }
+        //chrome.storage.local.set({"address":walletInfo},function(){ console.log("saved ok"); } );
         navigate('/wallet');
       }
       if (status !== 200) {

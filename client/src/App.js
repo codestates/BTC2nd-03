@@ -3,7 +3,7 @@ import "./App.css";
 import FirstPage from "./components/firstpage";
 import SecondPage from "./components/secondpage";
 import { MemoryRouter as Router, Routes, Route } from "react-router-dom";
-import ImportWalletPage from "./components/page/ImportWalletPage";
+import ImportWalletPage from "./pages/ImportWalletPage";
 
 function App() {
   return (

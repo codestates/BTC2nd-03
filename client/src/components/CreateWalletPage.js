@@ -13,12 +13,12 @@ import React, { useRef, useContext } from "react";
 import axios from "axios";
 import { InfoContext } from "../store/InfoContext";
 
-const Thirdpage = () => {
+const CreatewalletPage = () => {
   const navigate = useNavigate();
 
   const passwordInput = useRef();
   const checkPasswordInput = useRef();
-  const {info, setInfo} = useContext(InfoContext);
+  const { info, setInfo } = useContext(InfoContext);
 
   const handleChangeState = (e) => {
     setInfo({
@@ -43,10 +43,10 @@ const Thirdpage = () => {
 
     const post = await axios
       .post("http://localhost:5005/api/mnemonic", formData)
-      .then(({data}) => {
-        const {data:mnemonicData} = data;
+      .then(({ data }) => {
+        const { data: mnemonicData } = data;
         console.log("res", data);
-        navigate("/fourthpage",{state:mnemonicData});
+        navigate("/viewmnemonicpage", { state: mnemonicData });
       })
       .catch((err) => console.log(err));
   };
@@ -116,4 +116,4 @@ const Thirdpage = () => {
   );
 };
 
-export default Thirdpage;
+export default CreatewalletPage;

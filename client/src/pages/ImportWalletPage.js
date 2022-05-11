@@ -1,11 +1,13 @@
 import React from 'react';
 import { IconButton, OutlinedInput, InputLabel,Container,InputAdornment, Button, Stack, Typography, TextField,FormControl  } from "@mui/material";
 import {Visibility,VisibilityOff } from "@mui/icons-material";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { useNavigate } from "react-router-dom";
 import {createWallet} from "../api/WalletApi";
-
+import {detect} from 'detect-browser';
 
 const ImportWalletPage = () => {
+  const browserInfo = detect();
     const navigate = useNavigate();
     const [values, setValues] = React.useState({
       mnemonic: '',
@@ -15,8 +17,22 @@ const ImportWalletPage = () => {
     });
     
     const onSubmit = async () => {
-      const test = await createWallet(values);
-      console.log('onSumit: ',test);
+      const {data, status} = await createWallet(values);
+      if (status === 200) {
+        const {data:keystore} = data;
+        console.log(data);
+        console.log(keystore);
+        console.log(browserInfo.name, browserInfo.type)
+        /*global chrome*/
+        //chrome.storage.local.set({"address":keystore},function(){ console.log("saved ok"); } );
+        if(browserInfo.type === "extentions") {
+          
+        }
+        navigate('/wallet');
+      }
+      if (status !== 200) {
+        console.error(data);
+      }
     }
 
     const handleChange = (prop) => (event) => {
@@ -36,7 +52,13 @@ const ImportWalletPage = () => {
 
     return <Container maxWidth="sm" style={{ marginTop: "10%" }}>
     <Stack alignItems="left" spacing={3}>
-    <img src="/logo_2.png" alt="no img" width="190px" height="60px" />
+      <img src="/logo_2.png" alt="no img" width="190px" height="60px" />
+      <Stack direction={'row'} justifyContent="flex-start">
+      
+      <Button variant="text" style={{color:'gray'}} onClick={()=>navigate(-1)}>
+        <ArrowBackIosIcon fontSize='small'/> 뒤로
+        </Button>
+      </Stack>
       <Typography variant="h4">비밀 복구 구문으로 계정 가져오기</Typography>
       <Typography>지갑을 복구하려면 비밀 구문을 여기에 입력하세요.</Typography>
       <FormControl sx={{ m: 1, width: '45ch' }} variant="outlined">

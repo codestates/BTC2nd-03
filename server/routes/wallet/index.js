@@ -92,7 +92,7 @@ router.post('/wallet/import', async(req,res) => {
 
 //니모닉 코드와 패스워드를 이용해 keystore와 address를 생성합니다.
 router.post('/wallet', async(req, res) => {
-    let password = req.body.password
+    let password = req.body.password;
     let mnemonic = req.body.mnemonic;
     let accountCount=1;
     if(req.body.accountCount==null|| req.body.accountCount=="")

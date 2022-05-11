@@ -7,13 +7,14 @@
     "service_worker": "/static/js/background.js"
   },
   "action": {
-    "default_popup": "index.html",
+    "default_popup": "popup.html",
     "default_title": "Open the popup",
     "default_icon": "logo.png"
   },  
   "permissions": [
     "activeTab",
-    "tabs"
+    "tabs",
+    "storage"
   ],
   "icons": {
       "16": "logo192.png",

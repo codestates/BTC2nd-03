@@ -1,26 +1,28 @@
 import { Container, Grid, Typography, Paper, Box, Button } from "@mui/material";
 import { GetApp, Add } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 const SecondPage = () => {
   const navigate = useNavigate();
   return (
     <Container style={{ marginTop: "2%" }}>
       <img src="/logo_2.png" alt="no img" width="190px" height="60px" />
+      <Grid container sx={{ justifyContent: "center", marginTop: "60px" }}>
+        <Typography variant="h5" component="p">
+          roly-poly가 처음이세요?
+        </Typography>
+      </Grid>
       <Grid
         container
-        spacing={5}
-        sx={{ justifyContent: "center", marginTop: "60px" }}
+        sx={{
+          justifyContent: "space-around",
+          marginTop: "60px",
+        }}
       >
-        <Grid container sx={{ justifyContent: "center" }}>
-          <Typography variant="h5" component="p">
-            roly-poly가 처음이세요?
-          </Typography>
-        </Grid>
         <Grid item xs={5}>
           <Paper elevation={3} sx={{ borderRadius: "10px" }}>
             <Box padding={5} sx={{ textAlign: "center" }}>
-              <GetApp />
+              <GetApp fontSize="large" />
               <Typography variant="h6" component="p">
                 아니요. 이미 비밀 복구 구문이 있습니다.
               </Typography>
@@ -43,7 +45,7 @@ const SecondPage = () => {
         <Grid item xs={5} sx={{ borderRadius: "10px" }}>
           <Paper elevation={3} sx={{ borderRadius: "20px" }}>
             <Box padding={5} sx={{ textAlign: "center" }}>
-              <Add />
+              <Add fontSize="large" />
               <Typography variant="h6" component="p">
                 설정을 시작하죠!
               </Typography>
@@ -57,7 +59,12 @@ const SecondPage = () => {
                 size="large"
                 sx={{ borderRadius: "20px", width: "50%" }}
               >
-                지갑 생성
+                <Link
+                  to="/thirdpage"
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  지갑 생성
+                </Link>
               </Button>
             </Box>
           </Paper>

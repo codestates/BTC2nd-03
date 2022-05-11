@@ -1,12 +1,12 @@
 // import React,{useEffect} from 'react';
 import "./App.css";
-import FirstPage from "./components/firstpage";
-import SecondPage from "./components/secondpage";
+import WelcomePage from "./components/WelcomePage";
+import SelectPage from "./components/SelectPage";
 import { MemoryRouter as Router, Routes, Route } from "react-router-dom";
 import ImportWalletPage from "./pages/ImportWalletPage";
 import WalletPage from "./pages/WalletPage";
-import ThirdPage from "./components/thirdpage";
-import FourthPage from "./components/fourthpage";
+import CreateWalletPage from "./components/CreateWalletPage";
+import ViewMnemonicPage from "./components/ViewMnemonicPage";
 import InfoContextProvider from "./store/InfoContext";
 
 function App() {
@@ -15,12 +15,15 @@ function App() {
       <Router>
         <Routes>
           <Route path="/*">
-            <Route index element={<FirstPage />} />
-            <Route path="secondpage" element={<SecondPage />} />
-            <Route path="import-with-seed-pharse" element={<ImportWalletPage />} />
+            <Route index element={<WelcomePage />} />
+            <Route path="selectpage" element={<SelectPage />} />
+            <Route
+              path="import-with-seed-pharse"
+              element={<ImportWalletPage />}
+            />
             <Route path="wallet" element={<WalletPage />} />
-            <Route path="thirdpage" element={<ThirdPage />} />
-            <Route path="fourthpage" element={<FourthPage />} />
+            <Route path="createwalletpage" element={<CreateWalletPage />} />
+            <Route path="viewmnemonicpage" element={<ViewMnemonicPage />} />
           </Route>
         </Routes>
       </Router>

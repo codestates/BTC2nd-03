@@ -17,7 +17,12 @@ function firstpage() {
         <Typography>폴리곤 및 분산형 웹에 연결합니다.</Typography>
         <Typography>반갑습니다.</Typography>
         <Button variant="contained">
-          <Link to="/secondpage">시작하기</Link>
+          <Link
+            to="/secondpage"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            시작하기
+          </Link>
         </Button>
       </Stack>
     </Container>

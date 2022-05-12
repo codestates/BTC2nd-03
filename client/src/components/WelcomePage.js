@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import { Container, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
-function firstpage() {
+function WelcomePage() {
   return (
     <Container maxWidth="sm" style={{ marginTop: "10%" }}>
       <Stack alignItems="center" spacing={2}>
@@ -18,7 +18,7 @@ function firstpage() {
         <Typography>반갑습니다.</Typography>
         <Button variant="contained">
           <Link
-            to="/secondpage"
+            to="/selectpage"
             style={{ textDecoration: "none", color: "white" }}
           >
             시작하기
@@ -29,4 +29,4 @@ function firstpage() {
   );
 }
 
-export default firstpage;
+export default WelcomePage;

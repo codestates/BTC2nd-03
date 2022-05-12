@@ -13,7 +13,8 @@
   },  
   "permissions": [
     "activeTab",
-    "tabs"
+    "tabs",
+    "storage"
   ],
   "icons": {
       "16": "logo192.png",

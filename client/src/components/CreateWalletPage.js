@@ -9,47 +9,46 @@ import {
 } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useNavigate } from "react-router-dom";
-import React, { useRef, useState } from "react";
+import React, { useRef, useContext } from "react";
 import axios from "axios";
+import { InfoContext } from "../store/InfoContext";
 
-const Thirdpage = () => {
+const CreatewalletPage = () => {
   const navigate = useNavigate();
 
   const passwordInput = useRef();
   const checkPasswordInput = useRef();
-
-  const [state, setState] = useState({
-    password: "",
-    checkPassword: "",
-  });
+  const { info, setInfo } = useContext(InfoContext);
 
   const handleChangeState = (e) => {
-    setState({
-      ...state,
+    setInfo({
+      ...info,
       [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = async () => {
-    if (state.password.length < 7) {
+    if (info.password.length < 7) {
       alert("비밀번호는 8자 이상 입력해주세요");
       return;
-    } else if (state.checkPassword.length < 7) {
+    } else if (info.checkPassword.length < 7) {
       alert("비밀번호는 8자 이상 입력해주세요");
 
       return;
     }
 
     const formData = new FormData();
-    formData.append("password", state.password);
-    formData.append("checkPassword", state.checkPassword);
+    formData.append("password", info.password);
+    formData.append("checkPassword", info.checkPassword);
 
     const post = await axios
-      .post("http://localhost:5005/wallet/newMnemonic", formData)
-      .then((res) => console.log("res", res))
+      .post("http://localhost:5005/api/mnemonic", formData)
+      .then(({ data }) => {
+        const { data: mnemonicData } = data;
+        console.log("res", data);
+        navigate("/viewmnemonicpage", { state: mnemonicData });
+      })
       .catch((err) => console.log(err));
-    console.log("post", post);
-    navigate("/fourthpage");
   };
 
   return (
@@ -80,7 +79,7 @@ const Thirdpage = () => {
           ref={passwordInput}
           type="password"
           name="password"
-          value={state.password}
+          value={info.password}
           onChange={handleChangeState}
           sx={{ width: "22rem" }}
         />
@@ -93,7 +92,7 @@ const Thirdpage = () => {
           ref={checkPasswordInput}
           type="password"
           name="checkPassword"
-          value={state.checkPassword}
+          value={info.checkPassword}
           onChange={handleChangeState}
           sx={{ width: "22rem" }}
         />
@@ -117,4 +116,4 @@ const Thirdpage = () => {
   );
 };
 
-export default Thirdpage;
+export default CreatewalletPage;

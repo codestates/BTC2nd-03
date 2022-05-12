@@ -1,5 +1,5 @@
 import React,{useEffect, useState, useContext, useRef} from 'react';
-import { Card, Stack,Avatar, Button,Divider,TextField, Typography, Fab, Tabs, Tab, Box,Popover,List , ListItem, ListItemButton,ListItemText   } from "@mui/material";
+import { Card, Stack,Avatar, Button,Divider,TextField, Typography, Fab, Tabs, Tab, Box,Popover,List , ListItem, ListItemButton   } from "@mui/material";
 import {Visibility,VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import {createWallet} from "../api/WalletApi";
@@ -12,8 +12,8 @@ import WalletHeader from '../components/wallet/WalletHeader';
 import { getBalance } from '../api/CoinApi';
 import { transBalance } from '../config/Utils';
 import { InfoContext } from "../store/InfoContext";
-
-
+import MoreMenu from '../components/wallet/MoreMenu';
+import TokenItem from '../components/coin/TokenItem';
 const WalletPage = () => {
     const navigate = useNavigate();
     const [address, SetAddress] = useState({address:"",keystore:""});
@@ -27,6 +27,7 @@ const WalletPage = () => {
             setCoin(balance)
         }
     };
+
     useEffect(()=> {
         const getAddress = GetStorageByBrowserType('address');
         getCoinBalance(getAddress);
@@ -39,7 +40,7 @@ const WalletPage = () => {
             <WalletHeader/>
         </Stack>
         <Divider style={{margin:'10px 0'}}/>
-        <WallAccount address={address}/>
+        <WalletAccount address={address}/>
         <Divider style={{margin:'10px 0'}}/>
         <Stack alignItems="center" spacing={2}>
             <Avatar src="/matic.png"></Avatar>
@@ -77,7 +78,7 @@ const TabPanel = (props) => {
     );
   }
 
-const WallAccount = ({address}) => {
+const WalletAccount = ({address}) => {
     const copyAddressRef = useRef();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -93,34 +94,36 @@ const WallAccount = ({address}) => {
     };
 
     const copyAddressUrl = () => {
-        // copyAddressRef.current.focus();
-        // copyAddressRef.current.select();
         navigator.clipboard.writeText(copyAddressRef.current.value);
     }
-    return <Stack alignItems="center">
-        <Typography variant='body1' component="div">Account 1</Typography>
-        <Button aria-describedby={id} variant='text' onClick={handleClick} >
-            <TextField id="address" variant="standard" size="small" disabled inputRef={copyAddressRef} value={address.address} />
-            <ContentCopyIcon fontSize='small' style={{margin:'0 5px'}}/>
-        </Button>
-        <Popover
-            id={id}
-            open={open}
-            anchorEl={anchorEl}
-            onClose={handleClose}
-            anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'center',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'center',
-              }}
-        >
-            <Typography sx={{ p: 2 }}>복사 완료.</Typography>
-        </Popover>
-    </Stack>
-
+    return <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
+            <div style={{padding:'0 10px'}}/>
+            <Stack alignItems={"center"}>
+                <Typography variant='body1' component="div">Account 1</Typography>
+                <Button aria-describedby={id} variant='text' onClick={handleClick} >
+                    <TextField id="address" variant="standard" size="small" disabled inputRef={copyAddressRef} value={address.address} />
+                    <ContentCopyIcon fontSize='small' style={{margin:'0 5px'}}/>
+                </Button>
+            
+            <Popover
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                }}
+            >
+                <Typography sx={{ p: 2 }}>복사 완료.</Typography>
+            </Popover>
+            </Stack>
+            <MoreMenu/>
+        </Stack>
 }
 
 const WalletTab = () => {
@@ -165,17 +168,6 @@ const WalletTab = () => {
 </Box>
 }
 
-const TokenItem = ({name,value=0}) => {
-    return <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
-    <Stack direction={"row"} >
-        <Avatar src="/matic.png"/>
-        <div style={{padding:'0 10px'}}/>
-        <Stack>
-            <Typography variant='body2'>{transBalance(value)} {name}</Typography>
-            <Typography variant='body2'>$0.00 USD</Typography>
-        </Stack>
-    </Stack>
-</Stack>
-}
+
 
 export default WalletPage;

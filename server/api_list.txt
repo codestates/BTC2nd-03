@@ -82,3 +82,34 @@
       "data": "",
       "message": "TypeError: lightwallet.keystore.createVault2 is not a function"
     }
+
+
+[3] getbalance 
+ 1) http method : post
+ 2) url : http://localhost:5005/coin/getBalance
+ 3) request and response 예시
+  3-1) request 예시 
+  >> request body 예시 (body > json 형식 포맷)
+  {
+
+    "account" : "0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65"
+    
+  }
+  >> response body 예시  
+  //성공시 
+  {
+    "status": "OK",
+    "status_code": 200,
+    "data": {
+        "wei": "139377332219816000",
+        "matic": "0.139377332219816"
+    },
+    "message": "success"
+  }
+  //실패시 
+  {
+    "status": "FAIL",
+    "status_code": 400,
+    "data": "",
+    "message": "Error: Provided address 0xc6516E8E3379299AaC6b2f5a3688a6CfB93765 is invalid, the capitalization checksum test failed, or it's an indirect IBAN address which can't be converted."
+}

@@ -1,4 +1,3 @@
-// import React,{useEffect} from 'react';
 import "./App.css";
 import WelcomePage from "./components/WelcomePage";
 import SelectPage from "./components/SelectPage";
@@ -8,6 +7,9 @@ import WalletPage from "./pages/WalletPage";
 import CreateWalletPage from "./components/CreateWalletPage";
 import ViewMnemonicPage from "./components/ViewMnemonicPage";
 import InfoContextProvider from "./store/InfoContext";
+import MainPage from "./scan/MainPage";
+import TxnHashPage from "./scan/TxnHashPage";
+import BlockPage from "./scan/BlockPage";
 
 function App() {
   return (
@@ -24,6 +26,9 @@ function App() {
             <Route path="wallet" element={<WalletPage />} />
             <Route path="createwalletpage" element={<CreateWalletPage />} />
             <Route path="viewmnemonicpage" element={<ViewMnemonicPage />} />
+            <Route path="mainpage" element={<MainPage />} />
+            <Route path="txnhash" element={<TxnHashPage />} />
+            <Route path="block" element={<BlockPage />} />
           </Route>
         </Routes>
       </Router>

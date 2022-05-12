@@ -489,3 +489,82 @@
     "data": "",
     "message": "Error: Failed to check for transaction receipt:\n{}"
 }
+
+
+
+[8] getBlockInfo
+ 
+ 1) http method : post
+ 2) request url : http://localhost:5005/coin/getBlockInfo/[BlockNumber]
+ 3) request and response 예시
+   3-1) request 
+
+   http://localhost:5005/coin/getBlockInfo/26290542
+
+   3-2) response 예시 
+
+   >>성공시 예시 1)
+
+{
+    "status": "OK",
+    "status_code": 200,
+    "data": {
+        "blockInfo": {
+            "baseFeePerGas": 10,
+            "difficulty": "3",
+            "extraData": "0xd682021083626f7288676f312e31382e31856c696e7578000000000000000000e88eaaac904b4e48190bb1809cc559067cf87498bc1e879a72d9db895c3aa3ff4ed348f3d6dcc8ee547c4e7f5ef3148f7d7067bfdf4426a42ac2077d91b68c8901",
+            "gasLimit": 20000000,
+            "gasUsed": 9068380,
+            "hash": "0x4a265b6460614e4bced7611bab89d06a091e4ec1fa2f37147c9f7fe381006f96",
+            "logsBloom": "0xf96b82a71f7f79d078a51ab7c603ba75f9feb96b1ba37f97767eb63daebe2e7d108fb1e1a7fd31029b99a515e2fba7fe8969b5ff9492ff6dcb6539c7deff16667e765b03f333cc3aad966dbec4d637ebe7c7983ace7e47b5b95b163e4a9efef95ccb2547ff0a5a09fce9679ab94e6ef7c7f7457affbd02099f63f87519fa71c8ee37eda4f1fb57fc17f9ce7eb1facf39fed8b329d9c3eb3ade7006f52696d7ebb7878ea79461b952850c3db81c7eeb1755212642ecf4378d7fb7907f30a7c353f7ed6cc6f8dc5fdc39ff77005d77aefdf9ee146d62f693e3bbfe8e5c75e9751fecf357ff0e08b4c42c2ac701a097f505549dc56b2ff392fcafbc0a5e5ff3728b",
+            "miner": "0x0000000000000000000000000000000000000000",
+            "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+            "nonce": "0x0000000000000000",
+            "number": 26290542,
+            "parentHash": "0x3d70530f348e0f8278a3b664b66643806349e781285aa1aeb30068d67e03f79a",
+            "receiptsRoot": "0x24023a0a9764f798ce174fc5a09f807238ef6513b8617c7adb5116f0051684c0",
+            "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+            "size": 25667,
+            "stateRoot": "0x149ab0608e175fda29ba7cfd5b75bf0150413aa891ec48647dbaf1e4b8bbbb84",
+            "timestamp": 1652316632,
+            "totalDifficulty": "181894986",
+            "transactions": [
+                "0x45f034574826eae230f7688785bf8889515a43e99651cdecd52598714b70a5b3",
+                "0x572e6439425e0ab5c5e8011e27c23ace8bc60ff30ae895ed9cd089ffb52553e9",
+                "0x6d71614c425db1f9c008287514bd29fd41184b76c257610380857639947be2c8",
+                "0x4afe708ed78f45fd79e7cc8c3baf82cd1da965999f55b83fd8149f35b2d16e70",
+                "0xeab1d1ccf1d5f47cbf9cbc7a4a278928edfa4a9087053d273af3cb26ab2eac9e",
+                "0xba452a0346abc2eab15b6138ca6b9e82eb6d75b30a2945d91d4b6bc5e2262e17",
+                "0x48b1a613d1bf1e202eea29a3f6493a46041ac3a66720c403327e27131e0ee3b4",
+                "0x262ad8c3ebf7b9671c19f2a2609a6fa52a72ee03a4d2022308f7bf2985e32623",
+                "0xa2f7fa597772fdecc9a0f20c648cfb31f3c30a7a01fe3a8ca0f4cf623bb42976",
+                "0xd927c4f6cd9e1191d818c3d556a104e8cd40a7ccc83273772ed2d467bb023fae",
+                "0x28dfba366f453706d16a13c1350a12faef35773f3cf9038416f608fdd848dea9",
+                "0xa7ea65677a1ed91fc15c096f58bb1c60f73b47f281aac7deca54e7d5eda3e285",
+                "0x9a4889b34231687395d319c2d930629d07da5818cd4f35a6e91e613bdcb4347c",
+                "0xb493facf436ef62accc783ff019296b1b9c82bba068b1cce41c3b7ce22f3afa9",
+                "0x2850457d701f967646a11e617f69db2e7fbd0e8d7fa9418447b280d1b75a7ec5",
+                "0x5755ed7b0d501a1a68bcc1b2c0cfda07800f83a7be5702b0c3f02dd7457b32b7",
+                "0xd05bc33eeb309618c6c151508ce9b98237327d3e3cacf88735f63c9ad29da2a4",
+                "0x5b839cceaf3803964bce630e1ef8489e462a0aa6d2053281bfc91896d504a5fa",
+                "0xf36ef7aaace9b2c8ddb86163692fe6c919c56b6833aaf0ffdbac8edf16110f4d",
+                "0x604a49b03b31837c19962f89853a1e91ef87aa38c91aba03a3b20f097c12d3a3",
+                "0x6290e22dd867e60dda30a9de2e7aa3d7faad995d5edc5a60827fad4f33025bd6",
+                "0x84b2888f65a2618f9ee48babca27fb4233fe165b5d1d3d0c104cf32462edabbc"
+            ],
+            "transactionsRoot": "0x368119c85f96258a22c3614ab0a58d7c526d05729493169ff6b1569a48fe5cec",
+            "uncles": []
+        }
+    },
+    "message": "success"
+}
+
+    >>실패시 예시 1)
+
+     
+    {
+    "status": "FAIL",
+    "status_code": 400,
+    "data": "",
+    "message": "TypeError: web3.eth.getBlock2 is not a function"
+    }  

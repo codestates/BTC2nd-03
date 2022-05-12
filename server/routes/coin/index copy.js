@@ -235,43 +235,4 @@ router.post('/transfer', async (req, res, next) => {
 });
 
 
-
-router.get('/getBlockInfo/:blockNumber', async (req, res, next) => {  
-  const blockNumber= req.params.blockNumber;
-  //const blockNum = "26290542";
-  console.log("current blockNumber (Info function) : ",blockNumber);
-  
-  try { 
-
-    const rpcURL = "https://rpc-mumbai.matic.today";
-    const web3= new Web3(new Web3.providers.HttpProvider(rpcURL));
-    
-    
-    let blockInfo=await web3.eth.getBlock(blockNumber);
-
-    console.log("Returened Block Info : ",blockInfo);
-
-
-    res.status(200).json(
-      { 'status':'OK',
-        'status_code':200,
-        'data': {blockInfo},
-        'message':'success' 
-      });
-
-    }catch(err)
-   {
-      console.log(err);
-      res.status(200).json(
-      { 
-        'status':'FAIL',
-        'status_code':400,
-        'data': "",
-        'message': err.toString()
-      });
-   }
-  
-});  
-
-
 module.exports = router;

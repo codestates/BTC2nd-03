@@ -1,16 +1,15 @@
-import React from 'react';
+import React,{useState,useContext} from 'react';
 import { IconButton, OutlinedInput, InputLabel,Container,InputAdornment, Button, Stack, Typography, TextField,FormControl  } from "@mui/material";
 import {Visibility,VisibilityOff } from "@mui/icons-material";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {createWallet} from "../api/WalletApi";
-import {detect} from 'detect-browser';
+import {SetStorageByBrowserType} from "../config/Utils";
+import { WalletContext } from "../store/InfoContext";
 
 const ImportWalletPage = () => {
-  const browserInfo = detect();
     const navigate = useNavigate();
-    const location = useLocation();
-    const [values, setValues] = React.useState({
+    const [values, setValues] = useState({
       mnemonic: '',
       password: '',
       password_confirm: '',
@@ -22,10 +21,10 @@ const ImportWalletPage = () => {
       if (status === 200) {
         const {data:walletInfo} = data;
         console.log(walletInfo);
-        console.log(browserInfo.name, browserInfo.type)
-        console.log(location);
-        /*global chrome*/
-        //chrome.storage.local.set({"address":walletInfo},function(){ console.log("saved ok"); } );
+        
+        //setWallet(walletInfo);
+        SetStorageByBrowserType("address",walletInfo);
+
         navigate('/wallet');
       }
       if (status !== 200) {

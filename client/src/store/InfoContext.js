@@ -9,6 +9,7 @@ export const InfoContext = createContext({
     setInfo: (info) => {}
 });
 
+
 const InfoContextProvider = ({children})=>{
     const [info, setInfo] = useState({password:"",checkPassword: ""});
 

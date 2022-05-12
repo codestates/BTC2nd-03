@@ -163,5 +163,76 @@ router.post('/createAccount', async (req, res, next) => {
 
 
 
+//
+
+router.post('/transfer', async (req, res, next) => {  
+
+  console.log("transfer request requested--");
+
+  const sender=req.body.sender; //sender account address
+  const receiver=req.body.sender; //receiver account address
+  const matic_amount=req.body.matic_amount;  //amount : Matic (unit)
+  const private_key=req.body.private_key;
+
+  console.log("sender : ",sender);
+  console.log("receiver : ",receiver);
+  console.log("matic_amount : ",matic_amount);
+  console.log("private_key : ",private_key);
+  
+  try { 
+    
+    const rpcURL = "https://rpc-mumbai.matic.today";
+    const web3= new Web3(new Web3.providers.HttpProvider(rpcURL));
+
+    console.log("matic amount (wei) : ",web3.utils.toWei(matic_amount, "ether"));  
+
+    
+    const nonce = await web3.eth.getTransactionCount(sender, 'latest'); // nonce starts counting from 0
+    console.log("nonce : ",nonce);
+    
+    let amount=await web3.utils.toWei(matic_amount, "ether");
+    //let gas= await web3.eth.getGasPrice();
+    //let maxPriorityFeePerGas=await web3.eth.getMaxPriorityFeePerGas();
+
+    const transaction = {
+      'to': receiver, 
+      'value': amount,  
+      'gas': 30000,
+      //'maxPriorityFeePerGas': 10000001,   //0.000000023650845947
+      //'maxPriorityFeePerGas': 23650845947,   //0.000000023650845947
+      // 'maxPriorityFeePerGas': 23700848947,   //0.000000023650845947
+      'maxPriorityFeePerGas': 25000848947,   //0.000000023650845947
+      //'maxPriorityFeePerGas': maxPriorityFeePerGas,
+      //'maxPriorityFeePerGas' : 1000000000,
+      'nonce': nonce,
+      // optional data field to send message or execute smart contract
+     };
+
+    const signedTx = await web3.eth.accounts.signTransaction(transaction, private_key);
+
+
+    let receipt= await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
+    
+    res.status(200).json(
+      { 'status':'OK',
+        'status_code':200,
+        'data': { receipt },
+        'message':'success' 
+      });
+
+    }catch(err)
+    {
+      console.log(err);
+      res.status(200).json(
+      { 
+        'status':'FAIL',
+        'status_code':400,
+        'data': "",
+        'message': err.toString()
+      });
+    }
+  
+});
+
 
 module.exports = router;

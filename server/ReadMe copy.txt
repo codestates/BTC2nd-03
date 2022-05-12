@@ -1,0 +1,256 @@
+[1] 니모닉 생성 요청  api (return 으로 생성한 니모닉 코드 return)
+ 1) method type : post 
+ 2) test url 주소 : http://localhost:5005/wallet/newMnemonic
+ 3) request body : 없음
+ 4) return 예제  
+  4-1) success 시에 return 예제 
+  {
+      "status": "OK",
+      "status_code": 200,
+      "data": {
+          "mnemonic": "voyage solve door silk diary amateur shallow lounge valid brick undo scheme"
+      },
+      "message": "success"
+  }
+
+  4-2) fail시에 return 예제 
+
+  {
+      "status": "FAIL",
+      "status_code": 400,
+      "data": "",
+      "message": "TypeError: lightwallet.keystore.generateRandomSeed2 is not a function"
+  }
+
+
+
+
+
+[2] 니모닉 코드와 패스워드를 이용한 keystore와 address를 return하는 api 
+ : (옵션으로 accountCount 를 입력받아(정수), address를 여러개 return 받을 수 있음)-아래 예시 3-2)참조
+
+ 1) http method : post
+ 2) url : http://localhost:5005/wallet/newWallet
+ 3) request and response 예시 
+  3-1) 옵션 accountCount 비 포함 요청시 
+  request body 예시 (body > json 형식 포맷)
+  {
+      "mnemonic": "voyage solve door silk diary amateur shallow lounge valid brick undo scheme",
+      "password": "7890",    
+  }
+  response body 예시 (성공시) -header :200 
+  { 
+      "status": "OK",
+      "status_code": 200,
+      "data": {
+          "keystore": "{\"encSeed\":{\"encStr\":\"nppohcxdmvAU2zZR+PmfEjnxa+Jp5eqUXHdsuGGdpTL2C7bMFdX9a1wGQzriOxkAvyPgz4oKwpEeDD72zDHKSllhlvR6h3SM1TYwE9y0uAfnIfmMsf3Z5AgjvJ3sgbLWil/PuHUS0kLehLNNQ7PtzZ2K/O7+JL7HVfLTezgB8C0SBoA6p2GhBQ==\",\"nonce\":\"JkDMBLeWgyOpruj0OTjQ0iEWcTzVtnMs\"},\"encHdRootPriv\":{\"encStr\":\"Q64mqLjwqPIK/h/qcltwUXejed7IFPPi7XhtsXt0N2W/iDCtFpRWViKDeyE7MUdLRJZFa8cVhDgp7MACP9R0B8cJYwunJK2GBv4a5vIdaFoLT1zoCeHrdIxKVmVPzLGlJ77tjds8oFazop6Jaa46Ch+W5coNqPMNCbol1ZuUrQ==\",\"nonce\":\"vN4P4SO7xtNvmSLnneV0duLYNZWpKut7\"},\"addresses\":[\"5a748ecb0b3bc1dbe7d66ef1bc6d78a689af1bd6\"],\"encPrivKeys\":{\"5a748ecb0b3bc1dbe7d66ef1bc6d78a689af1bd6\":{\"key\":\"ChmC/M20WLy86q0CIGklux656bDTfzdLIBDolC0FqvsW/KvSRE0w6fWl5ntvO6t2\",\"nonce\":\"NK+1hIZd8Lmnf8lF4eUsjZbSsv/98fW7\"}},\"hdPathString\":\"m/0'/0'/0'\",\"salt\":\"DkGHlYxpr9MqdmnW8tGlyeeiETrRtWbfZ9vn0dKCS3c=\",\"hdIndex\":1,\"version\":3}",
+          "address": "0x5a748ecb0b3bc1dbe7d66ef1bc6d78a689af1bd6"
+       },
+      "message": "success"
+  }
+  response body 예시 (실패시) -header :400
+  {
+     "status": "FAIL",
+     "status_code": 400,
+     "data": "",
+     "message": "TypeError: lightwallet.keystore.createVault2 is not a function"
+  }
+
+
+
+  3-2) 옵션 accountCount 포함 요청 시
+  request body 예시 (body > json 형식 포맷)
+  {
+      "mnemonic": "voyage solve door silk diary amateur shallow lounge valid brick undo scheme",
+      "password": "7890",
+      "accountCount" : 3
+  }
+  response body 예시 (성공시) -header :200 
+  {
+     "status": "OK",
+     "status_code": 200,
+     "data": {
+         "keystore": "{\"encSeed\":{\"encStr\":\"0KGX0JrweWnqIUoVvbuKrImza8eSgvTSXoJxaGEeV1skCtfqyp2hZWmq/HQHY83j2ux96jd07//hLir9GU5112OL7cmpLTYyiERkTA4mG4DW8QgzoBsidrT7TL0lHrl5AXCNlYGJ4L2sstD7GCIdrtnXLHHYLXWSBJvdnBld6/i1PVk+JHv0YQ==\",\"nonce\":\"njASUYR/MPKTT4Yjwb+ApAz3d0MKeB50\"},\"encHdRootPriv\":{\"encStr\":\"ht3kzwSEmyybEMb5JI3RDE6U2x1dYzXTZIUUbYNDvWwjm2SgoBROdL/WZfrQQftNuSGn32M0Ihp87fAKHO5jj7ZcSP1f+6w80ItRxfrPeM2Tf57s0hU5qnjV6/ruHT3YNkqmZgfz/KItIEVdsep8mdokUuruUV9nqPJHwqoEHQ==\",\"nonce\":\"tS0cm88HuDCMU+7y+7fySNdZWzKMWP9D\"},\"addresses\":[\"5a748ecb0b3bc1dbe7d66ef1bc6d78a689af1bd6\",\"97dbb4e97d163712ffd9757901df504fe18ac930\",\"c52c9db5011fcb9e557f87bb94c5abdfe81ae127\"],\"encPrivKeys\":{\"5a748ecb0b3bc1dbe7d66ef1bc6d78a689af1bd6\":{\"key\":\"OW3bz3GAnai5/T2ysmINZkL2ru/DPdJEJEVHC+BjeYiZ+TH/FoSgK+iY1cUejtky\",\"nonce\":\"DNny3exdJ8fTQLm8iYSjHxWp8Ps3e++g\"},\"97dbb4e97d163712ffd9757901df504fe18ac930\":{\"key\":\"InH5+1y1Uac6rBG+7qU91gCHo46LnUfl3jqUUnXdwWYlDju2mb326hn83mED/4pZ\",\"nonce\":\"48vnWe1e+PnGMPg7bRa9eP9WggOZEwWv\"},\"c52c9db5011fcb9e557f87bb94c5abdfe81ae127\":{\"key\":\"l15dg8MkgnFSbl13bELiOtndPR01cqV4ph7g8ww3fGIn5I0Rid8RKYAClFLgX4od\",\"nonce\":\"Wf51jmWn60auYbRQ0rZcsA5jbRhvn89M\"}},\"hdPathString\":\"m/0'/0'/0'\",\"salt\":\"UVe9fqrfMY8UQzCjvMmw6wXNKn0y0EcN5zn2QYuK2A4=\",\"hdIndex\":3,\"version\":3}",
+         "address": "0x5a748ecb0b3bc1dbe7d66ef1bc6d78a689af1bd6,0x97dbb4e97d163712ffd9757901df504fe18ac930,0xc52c9db5011fcb9e557f87bb94c5abdfe81ae127"
+     },
+     "message": "success"
+   }
+   response body 예시 (실패시) -header :400
+   {
+      "status": "FAIL",
+      "status_code": 400,
+      "data": "",
+      "message": "TypeError: lightwallet.keystore.createVault2 is not a function"
+    }
+
+
+[3] getbalance 
+ 1) http method : post
+ 2) url : http://localhost:5005/coin/getBalance
+ 3) request and response 예시
+  3-1) request 예시 
+  >> request body 예시 (body > json 형식 포맷)
+  {
+
+    "account" : "0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65"
+    
+  }
+  >> response body 예시  
+  //성공시 
+  {
+    "status": "OK",
+    "status_code": 200,
+    "data": {
+        "wei": "139377332219816000",
+        "matic": "0.139377332219816"
+    },
+    "message": "success"
+  }
+  //실패시 
+  {
+    "status": "FAIL",
+    "status_code": 400,
+    "data": "",
+    "message": "Error: Provided address 0xc6516E8E3379299AaC6b2f5a3688a6CfB93765 is invalid, the capitalization checksum test failed, or it's an indirect IBAN address which can't be converted."
+}
+
+[4] getTransactionInfo
+ 1) http method : get
+ 2) request url : http://localhost:5005/coin/getTransactionInfo/[TransactionId]
+ 3) request and response 예시
+  3-1) 
+   3-1-1) request 예시 
+   (get방식)
+   http://localhost:5005/coin/getTransactionInfo/0x9a4889b34231687395d319c2d930629d07da5818cd4f35a6e91e613bdcb4347c 
+
+   3-1-2) reponse 예시  
+
+   {
+    "status": "OK",
+    "status_code": 200,
+    "data": {
+        "transactionInfo": {
+            "accessList": [],
+            "blockHash": "0x4a265b6460614e4bced7611bab89d06a091e4ec1fa2f37147c9f7fe381006f96",
+            "blockNumber": 26290542,
+            "chainId": "0x13881",
+            "from": "0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65",
+            "gas": 21000,
+            "gasPrice": "23650845957",
+            "hash": "0x9a4889b34231687395d319c2d930629d07da5818cd4f35a6e91e613bdcb4347c",
+            "input": "0x",
+            "maxFeePerGas": "23650845961",
+            "maxPriorityFeePerGas": "23650845947",
+            "nonce": 0,
+            "r": "0x64696ea7e8f1301f7588e14d367ec3097347aac1002545e4e68c20c53a355a67",
+            "s": "0x356dd0f2417b8d2ec31e2cc353840ade71fe68b29bdb755f9da99d161733a899",
+            "to": "0x5E3972CD07Ff39159654498799615A54b2e4Cd19",
+            "transactionIndex": 12,
+            "type": 2,
+            "v": "0x0",
+            "value": "10000000000000000"
+        }
+    },
+    "message": "success"
+    }
+
+
+[5] getTransactionReceipt
+ 1) http method : get
+ 2) request url : http://localhost:5005/coin/getTransactionReceipt/[TransactionId]
+ 3) request and response 예시
+  3-1) 
+   3-1-1) request 예시 
+   (get방식)
+   http://localhost:5005/coin/getTransactionReceipt/0x9a4889b34231687395d319c2d930629d07da5818cd4f35a6e91e613bdcb4347c
+
+   3-1-2) reponse 예시  
+   {
+    "status": "OK",
+    "status_code": 200,
+    "data": {
+        "transactionReceipt": {
+            "blockHash": "0x4a265b6460614e4bced7611bab89d06a091e4ec1fa2f37147c9f7fe381006f96",
+            "blockNumber": 26290542,
+            "contractAddress": null,
+            "cumulativeGasUsed": 7552272,
+            "effectiveGasPrice": 23650845957,
+            "from": "0xc6516e8e3379299aac6b2f5a3688a6cfb9370b65",
+            "gasUsed": 21000,
+            "logs": [
+                {
+                    "address": "0x0000000000000000000000000000000000001010",
+                    "blockHash": "0x4a265b6460614e4bced7611bab89d06a091e4ec1fa2f37147c9f7fe381006f96",
+                    "blockNumber": 26290542,
+                    "data": "0x000000000000000000000000000000000000000000000000002386f26fc1000000000000000000000000000000000000000000000000000002c4c739415e3dd8000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002a14046d19d3dd8000000000000000000000000000000000000000000000000002386f26fc10000",
+                    "logIndex": 528,
+                    "removed": false,
+                    "topics": [
+                        "0xe6497e3ee548a3372136af2fcb0696db31fc6cf20260707645068bd3fe97f3c4",
+                        "0x0000000000000000000000000000000000000000000000000000000000001010",
+                        "0x000000000000000000000000c6516e8e3379299aac6b2f5a3688a6cfb9370b65",
+                        "0x0000000000000000000000005e3972cd07ff39159654498799615a54b2e4cd19"
+                    ],
+                    "transactionHash": "0x9a4889b34231687395d319c2d930629d07da5818cd4f35a6e91e613bdcb4347c",
+                    "transactionIndex": 12,
+                    "id": "log_d8a81df1"
+                },
+                {
+                    "address": "0x0000000000000000000000000000000000001010",
+                    "blockHash": "0x4a265b6460614e4bced7611bab89d06a091e4ec1fa2f37147c9f7fe381006f96",
+                    "blockNumber": 26290542,
+                    "data": "0x0000000000000000000000000000000000000000000000000001c3b779b28dd800000000000000000000000000000000000000000000000002c68af0bb1400000000000000000000000000000000000000000000000015939ec800452fcdbe7300000000000000000000000000000000000000000000000002c4c739416172280000000000000000000000000000000000000000000015939ec9c3fca9804c4b",
+                    "logIndex": 529,
+                    "removed": false,
+                    "topics": [
+                        "0x4dfe1bbbcf077ddc3e01291eea2d5c70c2b422b415d95645b9adcfd678cb1d63",
+                        "0x0000000000000000000000000000000000000000000000000000000000001010",
+                        "0x000000000000000000000000c6516e8e3379299aac6b2f5a3688a6cfb9370b65",
+                        "0x000000000000000000000000be188d6641e8b680743a4815dfa0f6208038960f"
+                    ],
+                    "transactionHash": "0x9a4889b34231687395d319c2d930629d07da5818cd4f35a6e91e613bdcb4347c",
+                    "transactionIndex": 12,
+                    "id": "log_ab0e6d97"
+                }
+            ],
+            "logsBloom": "0x00000000000000000000000000000000000000000000000100000001000000000000000000100000000000100000000000008000000200000000000000000000000000000000000000000020000000800000000000000000000100000000004000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000080000000000000000000200000000000000000000000000000000000000000000000000000000000004000000000000000000001000000000000000000000000800000108040000000000000000000000000000000000000000000000000000000000020000000100000",
+            "status": true,
+            "to": "0x5e3972cd07ff39159654498799615a54b2e4cd19",
+            "transactionHash": "0x9a4889b34231687395d319c2d930629d07da5818cd4f35a6e91e613bdcb4347c",
+            "transactionIndex": 12,
+            "type": "0x2"
+        }
+     },
+    "message": "success"
+    }
+
+
+[6] createAccount 요청 처리 
+
+ 1) http method : post
+ 2) request url : http://localhost:5005/coin/createAccount
+ 3) request and response 예시
+   3-1) request 
+    (body 본문 없음 )
+   3-2) response 예시 
+   >>success시에 
+
+   {
+    "status": "OK",
+    "status_code": 200,
+    "data": {
+        "new_account": {
+            "address": "0x41e6A776AC3cbBDC52dAed3c04741849E7d3fB27",
+            "privateKey": "0xe3a07d56582c4b000845581956caf509845c55bdfa491e53248be89782e8c20e"
+        }
+    },
+    "message": "success"
+   }
+
+   >>fail시에 
+   {
+    "status": "FAIL",
+    "status_code": 400,
+    "data": "",
+    "message": "TypeError: web3.eth.accounts.create2 is not a function"
+   }

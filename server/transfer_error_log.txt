@@ -1,0 +1,275 @@
+c1@ec1:~/test_btc/BTC2nd-03/server$ node index.js
+running on port -  5005
+transfer request requested--
+sender :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+receiver :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+matic_amount :  0.000001
+private_key :  55de0abd84091df936fda0cfb97ff949c2a5f2aa808ceea0c9c83e542f91823f
+matic amount (wei) :  1000000000000
+nonce :  7
+Error: Returned error: exceeds block gas limit
+    at Object.ErrorResponse (/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-core-helpers/lib/errors.js:28:19)
+    at /home/c1/test_btc/BTC2nd-03/server/node_modules/web3-core-requestmanager/lib/index.js:300:36
+    at XMLHttpRequest.request.onreadystatechange (/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-providers-http/lib/index.js:98:13)
+    at XMLHttpRequestEventTarget.dispatchEvent (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request-event-target.js:34:22)
+    at XMLHttpRequest._setReadyState (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:208:14)
+    at XMLHttpRequest._onHttpResponseEnd (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:318:14)
+    at IncomingMessage.<anonymous> (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:289:61)
+    at IncomingMessage.emit (node:events:402:35)
+    at endReadableNT (node:internal/streams/readable:1343:12)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  data: null
+}
+POST /coin/transfer 200 1560.445 ms - 104
+^C
+c1@ec1:~/test_btc/BTC2nd-03/server$ 
+c1@ec1:~/test_btc/BTC2nd-03/server$ node index.js
+running on port -  5005
+transfer request requested--
+sender :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+receiver :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+matic_amount :  0.000001
+private_key :  55de0abd84091df936fda0cfb97ff949c2a5f2aa808ceea0c9c83e542f91823f
+matic amount (wei) :  1000000000000
+nonce :  7
+Error: Invalid JSON RPC response: "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx/1.21.6</center>\r\n</body>\r\n</html>\r\n"
+    at Object.InvalidResponse (/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-core-helpers/lib/errors.js:43:16)
+    at XMLHttpRequest.request.onreadystatechange (/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-providers-http/lib/index.js:95:32)
+    at XMLHttpRequestEventTarget.dispatchEvent (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request-event-target.js:34:22)
+    at XMLHttpRequest._setReadyState (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:208:14)
+    at XMLHttpRequest._onHttpResponseEnd (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:318:14)
+    at IncomingMessage.<anonymous> (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:289:61)
+    at IncomingMessage.emit (node:events:402:35)
+    at endReadableNT (node:internal/streams/readable:1343:12)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21)
+POST /coin/transfer 200 1887.780 ms - 277
+^C
+c1@ec1:~/test_btc/BTC2nd-03/server$ node index.js
+running on port -  5005
+transfer request requested--
+sender :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+receiver :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+matic_amount :  0.000001
+private_key :  55de0abd84091df936fda0cfb97ff949c2a5f2aa808ceea0c9c83e542f91823f
+matic amount (wei) :  1000000000000
+nonce :  7
+Error: Returned error: exceeds block gas limit
+    at Object.ErrorResponse (/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-core-helpers/lib/errors.js:28:19)
+    at /home/c1/test_btc/BTC2nd-03/server/node_modules/web3-core-requestmanager/lib/index.js:300:36
+    at XMLHttpRequest.request.onreadystatechange (/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-providers-http/lib/index.js:98:13)
+    at XMLHttpRequestEventTarget.dispatchEvent (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request-event-target.js:34:22)
+    at XMLHttpRequest._setReadyState (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:208:14)
+    at XMLHttpRequest._onHttpResponseEnd (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:318:14)
+    at IncomingMessage.<anonymous> (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:289:61)
+    at IncomingMessage.emit (node:events:402:35)
+    at endReadableNT (node:internal/streams/readable:1343:12)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  data: null
+}
+POST /coin/transfer 200 1454.583 ms - 104
+^C
+c1@ec1:~/test_btc/BTC2nd-03/server$ node index.js
+running on port -  5005
+transfer request requested--
+sender :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+receiver :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+matic_amount :  0.000001
+private_key :  55de0abd84091df936fda0cfb97ff949c2a5f2aa808ceea0c9c83e542f91823f
+matic amount (wei) :  1000000000000
+nonce :  7
+Error: Returned error: exceeds block gas limit
+    at Object.ErrorResponse (/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-core-helpers/lib/errors.js:28:19)
+    at /home/c1/test_btc/BTC2nd-03/server/node_modules/web3-core-requestmanager/lib/index.js:300:36
+    at XMLHttpRequest.request.onreadystatechange (/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-providers-http/lib/index.js:98:13)
+    at XMLHttpRequestEventTarget.dispatchEvent (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request-event-target.js:34:22)
+    at XMLHttpRequest._setReadyState (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:208:14)
+    at XMLHttpRequest._onHttpResponseEnd (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:318:14)
+    at IncomingMessage.<anonymous> (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:289:61)
+    at IncomingMessage.emit (node:events:402:35)
+    at endReadableNT (node:internal/streams/readable:1343:12)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  data: null
+}
+POST /coin/transfer 200 1675.648 ms - 104
+^C
+c1@ec1:~/test_btc/BTC2nd-03/server$ node index.js
+running on port -  5005
+transfer request requested--
+sender :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+receiver :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+matic_amount :  0.000001
+private_key :  55de0abd84091df936fda0cfb97ff949c2a5f2aa808ceea0c9c83e542f91823f
+matic amount (wei) :  1000000000000
+nonce :  7
+TypeError: web3.eth.getMaxPriorityFeePerGas is not a function
+    at /home/c1/test_btc/BTC2nd-03/server/routes/coin/index.js:195:45
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+POST /coin/transfer 200 1498.210 ms - 119
+^C
+c1@ec1:~/test_btc/BTC2nd-03/server$ node index.js
+running on port -  5005
+transfer request requested--
+sender :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+receiver :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+matic_amount :  0.000001
+private_key :  55de0abd84091df936fda0cfb97ff949c2a5f2aa808ceea0c9c83e542f91823f
+matic amount (wei) :  1000000000000
+nonce :  7
+Error: Returned error: exceeds block gas limit
+    at Object.ErrorResponse (/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-core-helpers/lib/errors.js:28:19)
+    at /home/c1/test_btc/BTC2nd-03/server/node_modules/web3-core-requestmanager/lib/index.js:300:36
+    at XMLHttpRequest.request.onreadystatechange (/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-providers-http/lib/index.js:98:13)
+    at XMLHttpRequestEventTarget.dispatchEvent (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request-event-target.js:34:22)
+    at XMLHttpRequest._setReadyState (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:208:14)
+    at XMLHttpRequest._onHttpResponseEnd (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:318:14)
+    at IncomingMessage.<anonymous> (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:289:61)
+    at IncomingMessage.emit (node:events:402:35)
+    at endReadableNT (node:internal/streams/readable:1343:12)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  data: null
+}
+POST /coin/transfer 200 2422.292 ms - 104
+^C
+c1@ec1:~/test_btc/BTC2nd-03/server$ node index.js
+running on port -  5005
+transfer request requested--
+sender :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+receiver :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+matic_amount :  0.000001
+private_key :  55de0abd84091df936fda0cfb97ff949c2a5f2aa808ceea0c9c83e542f91823f
+matic amount (wei) :  1000000000000
+Error: Invalid JSON RPC response: "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx/1.21.6</center>\r\n</body>\r\n</html>\r\n"
+    at Object.InvalidResponse (/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-core-helpers/lib/errors.js:43:16)
+    at XMLHttpRequest.request.onreadystatechange (/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-providers-http/lib/index.js:95:32)
+    at XMLHttpRequestEventTarget.dispatchEvent (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request-event-target.js:34:22)
+    at XMLHttpRequest._setReadyState (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:208:14)
+    at XMLHttpRequest._onHttpResponseEnd (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:318:14)
+    at IncomingMessage.<anonymous> (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:289:61)
+    at IncomingMessage.emit (node:events:402:35)
+    at endReadableNT (node:internal/streams/readable:1343:12)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21)
+POST /coin/transfer 200 596.249 ms - 277
+
+
+
+c1@ec1:~/test_btc/BTC2nd-03/server$ node index.js
+running on port -  5005
+transfer request requested--
+sender :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+receiver :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+matic_amount :  0.000001
+private_key :  55de0abd84091df936fda0cfb97ff949c2a5f2aa808ceea0c9c83e542f91823f
+matic amount (wei) :  1000000000000
+nonce :  7
+Error: Failed to check for transaction receipt:
+{}
+    at Object._fireError (/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-utils/lib/index.js:49:17)
+    at /home/c1/test_btc/BTC2nd-03/server/node_modules/web3-core-method/lib/index.js:245:23
+POST /coin/transfer 200 12085.197 ms - 109
+
+
+c1@ec1:~/test_btc/BTC2nd-03/server$ node index.js
+running on port -  5005
+transfer request requested--
+sender :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+receiver :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+matic_amount :  0.000001
+private_key :  55de0abd84091df936fda0cfb97ff949c2a5f2aa808ceea0c9c83e542f91823f
+matic amount (wei) :  1000000000000
+nonce :  8
+/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-core-helpers/lib/errors.js:43
+        return new Error(message);
+               ^
+
+Error: Invalid JSON RPC response: "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx/1.21.6</center>\r\n</body>\r\n</html>\r\n"
+    at Object.InvalidResponse (/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-core-helpers/lib/errors.js:43:16)
+    at XMLHttpRequest.request.onreadystatechange (/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-providers-http/lib/index.js:95:32)
+    at XMLHttpRequestEventTarget.dispatchEvent (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request-event-target.js:34:22)
+    at XMLHttpRequest._setReadyState (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:208:14)
+    at XMLHttpRequest._onHttpResponseEnd (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:318:14)
+    at IncomingMessage.<anonymous> (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:289:61)
+    at IncomingMessage.emit (node:events:402:35)
+    at endReadableNT (node:internal/streams/readable:1343:12)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21)
+c1@ec1:~/test_btc/BTC2nd-03/server$ 
+
+
+c1@ec1:~/test_btc/BTC2nd-03/server$ node index.js
+running on port -  5005
+transfer request requested--
+sender :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+receiver :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+matic_amount :  0.000001
+private_key :  55de0abd84091df936fda0cfb97ff949c2a5f2aa808ceea0c9c83e542f91823f
+matic amount (wei) :  1000000000000
+nonce :  9
+/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-core-helpers/lib/errors.js:43
+        return new Error(message);
+               ^
+
+Error: Invalid JSON RPC response: "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx/1.21.6</center>\r\n</body>\r\n</html>\r\n"
+    at Object.InvalidResponse (/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-core-helpers/lib/errors.js:43:16)
+    at XMLHttpRequest.request.onreadystatechange (/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-providers-http/lib/index.js:95:32)
+    at XMLHttpRequestEventTarget.dispatchEvent (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request-event-target.js:34:22)
+    at XMLHttpRequest._setReadyState (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:208:14)
+    at XMLHttpRequest._onHttpResponseEnd (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:318:14)
+    at IncomingMessage.<anonymous> (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:289:61)
+    at IncomingMessage.emit (node:events:402:35)
+    at endReadableNT (node:internal/streams/readable:1343:12)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21)
+c1@ec1:~/test_btc/BTC2nd-03/server$ 
+
+
+c1@ec1:~/test_btc/BTC2nd-03/server$ node index.js
+running on port -  5005
+transfer request requested--
+sender :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+receiver :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+matic_amount :  0.000001
+private_key :  55de0abd84091df936fda0cfb97ff949c2a5f2aa808ceea0c9c83e542f91823f
+matic amount (wei) :  1000000000000
+nonce :  9
+Error: Failed to check for transaction receipt:
+{}
+    at Object._fireError (/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-utils/lib/index.js:49:17)
+    at /home/c1/test_btc/BTC2nd-03/server/node_modules/web3-core-method/lib/index.js:245:23
+POST /coin/transfer 200 11729.619 ms - 109
+
+
+{
+    "status": "FAIL",
+    "status_code": 400,
+    "data": "",
+    "message": "Error: Invalid JSON RPC response: \"<html>\\r\\n<head><title>404 Not Found</title></head>\\r\\n<body>\\r\\n<center><h1>404 Not Found</h1></center>\\r\\n<hr><center>nginx/1.21.6</center>\\r\\n</body>\\r\\n</html>\\r\\n\""
+}
+
+
+
+c1@ec1:~/test_btc/BTC2nd-03/server$ node index.js
+running on port -  5005
+transfer request requested--
+sender :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+receiver :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+matic_amount :  0.000000000001
+private_key :  55de0abd84091df936fda0cfb97ff949c2a5f2aa808ceea0c9c83e542f91823f
+matic amount (wei) :  1000000
+nonce :  11
+POST /coin/transfer 200 6903.148 ms - 2925
+transfer request requested--
+sender :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+receiver :  0xc6516E8E3379299AaC6b2f5a3688a6CfB9370B65
+matic_amount :  0.000000000001
+private_key :  55de0abd84091df936fda0cfb97ff949c2a5f2aa808ceea0c9c83e542f91823f
+matic amount (wei) :  1000000
+nonce :  12
+Error: Invalid JSON RPC response: "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx/1.21.6</center>\r\n</body>\r\n</html>\r\n"
+    at Object.InvalidResponse (/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-core-helpers/lib/errors.js:43:16)
+    at XMLHttpRequest.request.onreadystatechange (/home/c1/test_btc/BTC2nd-03/server/node_modules/web3-providers-http/lib/index.js:95:32)
+    at XMLHttpRequestEventTarget.dispatchEvent (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request-event-target.js:34:22)
+    at XMLHttpRequest._setReadyState (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:208:14)
+    at XMLHttpRequest._onHttpResponseEnd (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:318:14)
+    at IncomingMessage.<anonymous> (/home/c1/test_btc/BTC2nd-03/server/node_modules/xhr2-cookies/dist/xml-http-request.js:289:61)
+    at IncomingMessage.emit (node:events:402:35)
+    at endReadableNT (node:internal/streams/readable:1343:12)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21)
+POST /coin/transfer 200 1090.765 ms - 277

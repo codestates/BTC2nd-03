@@ -1,7 +1,7 @@
 import React,{useEffect, useState, useRef} from 'react';
 import { Card, Stack,Avatar, Button,Divider,TextField, Typography, Fab, Tabs, Tab, Box,Popover,List , ListItem, ListItemButton,ListItemText   } from "@mui/material";
 import {Visibility,VisibilityOff } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {createWallet} from "../api/WalletApi";
 import {GetStorageByBrowserType} from "../config/Utils";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -10,13 +10,13 @@ import CallMadeIcon from '@mui/icons-material/CallMade';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import WalletHeader from '../components/wallet/WalletHeader';
 
-const WalletPage = () => {
+const TokenDetailPage = () => {
+    // uncover define core glare athlete verb actress work unusual buddy banana cricket
+    const {token_name} = useParams();
     const navigate = useNavigate();
     const [address, SetAddress] = useState({address:"",keystore:""});
     useEffect(()=>{
-        const getAddress = GetStorageByBrowserType('address');
-        console.log(getAddress);
-        SetAddress(getAddress);
+        console.log(token_name);
     },[])
 
     return <Card variant="outlined" style={{padding:10}}>
@@ -24,7 +24,7 @@ const WalletPage = () => {
             <WalletHeader/>
         </Stack>
         <Divider style={{margin:'10px 0'}}/>
-        <WallAccount address={address}/>
+        {/* <WallAccount address={address}/> */}
         <Divider style={{margin:'10px 0'}}/>
         <Stack alignItems="center" spacing={3}>
             <Avatar>P</Avatar>
@@ -126,13 +126,13 @@ const WalletTab = () => {
     <TabPanel value={value} index={0}>
         <List style={{padding:0}}>
           <ListItem style={{padding:'10px 0'}}>
-            <ListItemButton onClick={()=>navigate(`/wallet/token/MATIC`)}>
+            <ListItemButton>
               <TokenItem name={"MATIC"}/>
             </ListItemButton>
           </ListItem>
           <Divider/>
           <ListItem style={{padding:'10px 0'}}>
-            <ListItemButton onClick={()=>navigate(`/wallet/token/USDT`)}>
+            <ListItemButton>
             <TokenItem name={"USDT"}/>
             </ListItemButton>
           </ListItem>
@@ -165,4 +165,4 @@ const TokenItem = ({name}) => {
 </Stack>
 }
 
-export default WalletPage;
+export default TokenDetailPage;

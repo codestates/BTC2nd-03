@@ -43,19 +43,88 @@ router.post('/getBalance', async (req, res, next) => {
   
 });
   
-/*
-[1] 성공 return 예시 
-{
-    "status": "OK",
-    "status_code": 200,
-    "data": {
-        "wei": "139377332219816000",
-        "matic": "0.139377332219816"
-    },
-    "message": "success"
-}
 
-*/
+
+router.get('/getTransactionInfo/:transactionId', async (req, res, next) => {  
+  const transactionId = req.params.transactionId;
+
+  console.log("current transactionId (Info function) : ",transactionId);
+  
+  try { 
+
+    const rpcURL = "https://rpc-mumbai.matic.today";
+    const web3= new Web3(new Web3.providers.HttpProvider(rpcURL));
+    
+
+    //const transactionId = "0x9a4889b34231687395d319c2d930629d07da5818cd4f35a6e91e613bdcb4347c";  //Transaction Hash
+
+    let transactionInfo=await web3.eth.getTransaction(transactionId);
+      
+
+    console.log("Returened Transaction Info : ",transactionInfo);
+
+
+    res.status(200).json(
+      { 'status':'OK',
+        'status_code':200,
+        'data': {transactionInfo},
+        'message':'success' 
+      });
+
+    }catch(err)
+   {
+      console.log(err);
+      res.status(200).json(
+      { 
+        'status':'FAIL',
+        'status_code':400,
+        'data': "",
+        'message': err.toString()
+      });
+   }
+  
+});  
+
+
+router.get('/getTransactionReceipt/:transactionId', async (req, res, next) => {  
+    const transactionId = req.params.transactionId;
+
+    console.log("current transactionId (Receipt function) : ",transactionId);
+    
+    try { 
+  
+      const rpcURL = "https://rpc-mumbai.matic.today";
+      const web3= new Web3(new Web3.providers.HttpProvider(rpcURL));
+      
+
+      //const transactionId = "0x9a4889b34231687395d319c2d930629d07da5818cd4f35a6e91e613bdcb4347c";  //Transaction Hash
+
+      let transactionReceipt=await web3.eth.getTransactionReceipt(transactionId);
+        
+
+      console.log("Returened Transaction Receipt : ",transactionReceipt);
+
+  
+      res.status(200).json(
+        { 'status':'OK',
+          'status_code':200,
+          'data': {transactionReceipt},
+          'message':'success' 
+        });
+  
+     }catch(err)
+     {
+        console.log(err);
+        res.status(200).json(
+       { 
+        'status':'FAIL',
+        'status_code':400,
+        'data': "",
+        'message': err.toString()
+       });
+     }
+    
+  });  
 
 
 module.exports = router;

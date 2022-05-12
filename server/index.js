@@ -10,6 +10,7 @@ dotenv.config();
 //const cors = require('cors');
 const serverRouter= require('./routes/route_handle');
 const walletRouter = require('./routes/wallet/index');
+const tokenRouter = require('./routes/coin/index');
 
 const app = express();
 app.set('port', process.env.PORT ||5005);
@@ -48,6 +49,9 @@ app.get('/',(req,res)=>
 
 app.use('/test',serverRouter);
 app.use('/api', walletRouter);
+
+app.use('/coin', tokenRouter);
+
 
 app.use((req, res, next) => {
   const error =  new Error(`[APP] ${req.method} ${req.url} - no router.`);

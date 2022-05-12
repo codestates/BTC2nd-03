@@ -35,7 +35,7 @@ const ViewMnemonicPage = () => {
     }
   };
   return (
-    <Container maxwidth="sm" style={{ marginTop: "2%", marginLeft: "25%" }}>
+    <Container style={{ marginTop: "2%", marginLeft: "25%" }}>
       <img src="/logo_2.png" alt="no img" width="190px" height="60px" />
       <Stack spacing={3}>
         <Button

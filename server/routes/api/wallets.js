@@ -63,7 +63,7 @@ router.post('/mnemonic', async(req,res) => {
 }
 */
 
-router.post('/wallet/import', async(req,res) => {
+router.post('/import', async(req,res) => {
   const mnemonic = req.body.mnemonic;
   console.log(mnemonic);
   const test = lightwallet.keystore.getAddresses();
@@ -91,7 +91,7 @@ router.post('/wallet/import', async(req,res) => {
 });
 
 //니모닉 코드와 패스워드를 이용해 keystore와 address를 생성합니다.
-router.post('/wallet', async(req, res) => {
+router.post('/', async(req, res) => {
     let password = req.body.password;
     let mnemonic = req.body.mnemonic;
     let accountCount=1;

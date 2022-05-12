@@ -127,4 +127,41 @@ router.get('/getTransactionReceipt/:transactionId', async (req, res, next) => {
   });  
 
 
+
+//
+router.post('/createAccount', async (req, res, next) => {  
+
+  console.log("new account address :make requested--");
+  
+  try { 
+
+    const rpcURL = "https://rpc-mumbai.matic.today";
+    const web3= new Web3(new Web3.providers.HttpProvider(rpcURL));
+    
+    var new_account = await web3.eth.accounts.create();
+    
+    res.status(200).json(
+      { 'status':'OK',
+        'status_code':200,
+        'data': { new_account},
+        'message':'success' 
+      });
+
+  }  catch(err)
+  {
+    console.log(err);
+    res.status(200).json(
+    { 
+      'status':'FAIL',
+      'status_code':400,
+      'data': "",
+      'message': err.toString()
+    });
+  }
+  
+});
+
+
+
+
 module.exports = router;

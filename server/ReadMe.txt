@@ -223,3 +223,34 @@
      },
     "message": "success"
     }
+
+
+[6] createAccount 요청 처리 
+
+ 1) http method : post
+ 2) request url : http://localhost:5005/coin/createAccount
+ 3) request and response 예시
+   3-1) request 
+    (body 본문 없음 )
+   3-2) response 예시 
+   >>success시에 
+
+   {
+    "status": "OK",
+    "status_code": 200,
+    "data": {
+        "new_account": {
+            "address": "0x41e6A776AC3cbBDC52dAed3c04741849E7d3fB27",
+            "privateKey": "0xe3a07d56582c4b000845581956caf509845c55bdfa491e53248be89782e8c20e"
+        }
+    },
+    "message": "success"
+   }
+
+   >>fail시에 
+   {
+    "status": "FAIL",
+    "status_code": 400,
+    "data": "",
+    "message": "TypeError: web3.eth.accounts.create2 is not a function"
+   }

@@ -1,11 +1,11 @@
 import "./App.css";
-import WelcomePage from "./components/WelcomePage";
-import SelectPage from "./components/SelectPage";
+import WelcomePage from "./pages/WelcomePage";
+import SelectPage from "./pages/SelectPage";
 import { MemoryRouter as Router, Routes, Route } from "react-router-dom";
 import ImportWalletPage from "./pages/ImportWalletPage";
 import WalletPage from "./pages/WalletPage";
-import CreateWalletPage from "./components/CreateWalletPage";
-import ViewMnemonicPage from "./components/ViewMnemonicPage";
+import CreateWalletPage from "./pages/CreateWalletPage";
+import ViewMnemonicPage from "./pages/ViewMnemonicPage";
 import AddTokenPage from "./pages/AddTokenPage";
 import TransferTokenPage from "./pages/TransferTokenPage";
 import TokenDetailPage from "./pages/TokenDetailPage";

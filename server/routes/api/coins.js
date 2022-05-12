@@ -122,8 +122,6 @@ router.get('/getTransactionReceipt/:transactionId', async (req, res, next) => {
     
   });  
 
-
-
 //
 router.post('/createAccount', async (req, res, next) => {  
 

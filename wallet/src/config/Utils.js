@@ -20,3 +20,10 @@ export const GetStorageByBrowserType = (key) => {
         return JSON.parse(sessionStorage.getItem(key));
     }
 }
+
+export const transBalance = (balance) => {
+    if(!balance) {
+        return 0;
+    }
+    return Number(balance).toFixed(4);
+}

@@ -1,4 +1,4 @@
-import React,{useEffect, useState, useRef} from 'react';
+import React,{useEffect, useState, useContext, useRef} from 'react';
 import { Card, Stack,Avatar, Button,Divider,TextField, Typography, Fab, Tabs, Tab, Box,Popover,List , ListItem, ListItemButton,ListItemText   } from "@mui/material";
 import {Visibility,VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
@@ -9,12 +9,27 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import CallMadeIcon from '@mui/icons-material/CallMade';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import WalletHeader from '../components/wallet/WalletHeader';
+import { getBalance } from '../api/CoinApi';
+import { transBalance } from '../config/Utils';
+import { InfoContext } from "../store/InfoContext";
+
 
 const WalletPage = () => {
     const navigate = useNavigate();
     const [address, SetAddress] = useState({address:"",keystore:""});
-    useEffect(()=>{
+    // const [matic, setMatic] = useState({matic:"0", wei:"0"})
+    const {coin, setCoin} = useContext(InfoContext);
+
+    const getCoinBalance = async (getAddress) => {
+        const {data, status} = await getBalance(getAddress.address).catch((err)=> {console.log(err)});
+        if(status === 200) {
+            const {data:balance} = data;
+            setCoin(balance)
+        }
+    };
+    useEffect(()=> {
         const getAddress = GetStorageByBrowserType('address');
+        getCoinBalance(getAddress);
         console.log(getAddress);
         SetAddress(getAddress);
     },[])
@@ -26,9 +41,9 @@ const WalletPage = () => {
         <Divider style={{margin:'10px 0'}}/>
         <WallAccount address={address}/>
         <Divider style={{margin:'10px 0'}}/>
-        <Stack alignItems="center" spacing={3}>
-            <Avatar>P</Avatar>
-            <Typography variant='h4' component="p">4.9 MATIC</Typography>
+        <Stack alignItems="center" spacing={2}>
+            <Avatar src="/matic.png"></Avatar>
+            <Typography variant='h4' component="p">{transBalance(coin.matic)} MATIC</Typography>
             <Stack direction={"row"} spacing={5}>
                 <Stack spacing={1} alignItems="center">
                     <Fab size="small" color="secondary" aria-label="send" onClick={()=>navigate("/wallet/transfer-token")}>
@@ -111,7 +126,7 @@ const WallAccount = ({address}) => {
 const WalletTab = () => {
     const navigate = useNavigate();
     const [value, setValue] = React.useState(0);
-    
+    const {coin, setCoin} = useContext(InfoContext);
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
@@ -125,14 +140,14 @@ const WalletTab = () => {
     </Box>
     <TabPanel value={value} index={0}>
         <List style={{padding:0}}>
-          <ListItem style={{padding:'10px 0'}}>
-            <ListItemButton onClick={()=>navigate(`/wallet/token/MATIC`)}>
-              <TokenItem name={"MATIC"}/>
+          <ListItem style={{padding:'10px 0'}} secondaryAction={<ArrowForwardIosIcon/>}>
+            <ListItemButton onClick={()=>navigate(`/wallet/token/MATIC`)} >
+              <TokenItem name={"MATIC"} value ={coin.matic}/>
             </ListItemButton>
           </ListItem>
           <Divider/>
-          <ListItem style={{padding:'10px 0'}}>
-            <ListItemButton onClick={()=>navigate(`/wallet/token/USDT`)}>
+          <ListItem style={{padding:'10px 0'}} secondaryAction={<ArrowForwardIosIcon/>}>
+            <ListItemButton onClick={()=>navigate(`/wallet/token/USDT`)} >
             <TokenItem name={"USDT"}/>
             </ListItemButton>
           </ListItem>
@@ -150,18 +165,16 @@ const WalletTab = () => {
 </Box>
 }
 
-const TokenItem = ({name}) => {
+const TokenItem = ({name,value=0}) => {
     return <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
-    <Stack direction={"row"}>
-        <Avatar>P</Avatar>
+    <Stack direction={"row"} >
+        <Avatar src="/matic.png"/>
         <div style={{padding:'0 10px'}}/>
         <Stack>
-            <Typography variant='body2' component="p">0 {name}</Typography>
-            <Typography variant='body2' component="p">$0.00 USD</Typography>
+            <Typography variant='body2'>{transBalance(value)} {name}</Typography>
+            <Typography variant='body2'>$0.00 USD</Typography>
         </Stack>
-
     </Stack>
-    <ArrowForwardIosIcon/>
 </Stack>
 }
 

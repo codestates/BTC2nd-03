@@ -27,7 +27,7 @@ const TokenDetailPage = () => {
         {/* <WallAccount address={address}/> */}
         <Divider style={{margin:'10px 0'}}/>
         <Stack alignItems="center" spacing={3}>
-            <Avatar>P</Avatar>
+            <Avatar src="/matic.png"></Avatar>
             <Typography variant='h4' component="p">4.9 MATIC</Typography>
             <Stack direction={"row"} spacing={5}>
                 <Stack spacing={1} alignItems="center">

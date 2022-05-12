@@ -13,6 +13,7 @@ const ImportWalletPage = () => {
       mnemonic: '',
       password: '',
       password_confirm: '',
+      next:false,
       showMnemonic: false,
     });
     
@@ -42,6 +43,13 @@ const ImportWalletPage = () => {
         showMnemonic: !values.showMnemonic,
       });
     };
+
+    const handleNextButton = (value) => {
+      setValues({
+        ...values,
+        next: value,
+      });
+    }
 
     const handleMouseDownMnemonic = (event) => {
       event.preventDefault();
@@ -100,7 +108,7 @@ const ImportWalletPage = () => {
           label="PasswordConfirm"
         />
       </FormControl>
-      <Button variant="contained" onClick={()=>onSubmit()}>
+      <Button variant="contained" onClick={()=>onSubmit()} style={{width: '50ch'}}>
         가져오기
       </Button>
     </Stack>

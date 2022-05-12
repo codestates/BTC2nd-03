@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function WelcomePage() {
   return (
-    <Container maxWidth="sm" style={{ marginTop: "10%" }}>
+    <Container style={{ marginTop: "10%" }}>
       <Stack alignItems="center" spacing={2}>
         <img
           src="./logo.png"
@@ -22,6 +22,14 @@ function WelcomePage() {
             style={{ textDecoration: "none", color: "white" }}
           >
             시작하기
+          </Link>
+        </Button>
+        <Button variant="contained">
+          <Link
+            to="/mainpage"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            스캔 페이지
           </Link>
         </Button>
       </Stack>

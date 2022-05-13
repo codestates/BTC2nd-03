@@ -11,7 +11,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useNavigate } from "react-router-dom";
 import React, { useRef, useContext } from "react";
 import { InfoContext } from "../store/InfoContext";
-import {createMnemonic} from "../api/WalletApi";
+import { createMnemonic } from "../api/WalletApi";
 
 const CreatewalletPage = () => {
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ const CreatewalletPage = () => {
 
       return;
     }
-
+  
     const formData = new FormData();
     formData.append("password", info.password);
     formData.append("checkPassword", info.checkPassword);
@@ -45,10 +45,14 @@ const CreatewalletPage = () => {
     if (status === 200) {
       const {data:mnemonicData} = data;
 
-      navigate("/viewmnemonicpage", { state: mnemonicData });
+    const { data, status } = await createMnemonic(formData).catch((err) =>
+      console.log(err)
+    );
+    if (status === 200) {
+      const { data: mnemonicData } = data;
     }
   };
-
+  }
   return (
     <Container style={{ marginTop: "2%", marginLeft: "25%" }}>
       <img src="/logo_2.png" alt="no img" width="190px" height="60px" />

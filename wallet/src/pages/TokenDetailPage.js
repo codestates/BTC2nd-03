@@ -15,7 +15,7 @@ const TokenDetailPage = () => {
     const {token_name} = useParams();
     const navigate = useNavigate();
     const [address, SetAddress] = useState({address:"",keystore:""});
-    const {coin, setCoin} = useContext(InfoContext);
+    const {thisAccount, setThisAccount} = useContext(InfoContext);
     useEffect(()=>{
         console.log(token_name);
     },[])
@@ -29,7 +29,7 @@ const TokenDetailPage = () => {
         <Divider style={{margin:'10px 0'}}/>
         <Stack alignItems="center" spacing={3}>
             <Avatar src="/matic.png"></Avatar>
-            <Typography variant='h4' component="div">{transBalance(coin.matic)} MATIC</Typography>
+            <Typography variant='h4' component="div">{transBalance(thisAccount.coin.matic)} MATIC</Typography>
             <Stack direction={"row"} spacing={5}>
                 <Stack spacing={1} alignItems="center">
                     <Fab size="small" color="secondary" aria-label="send" onClick={()=>navigate("/wallet/transfer-token")}>
@@ -39,7 +39,7 @@ const TokenDetailPage = () => {
                 </Stack>
             </Stack>
         </Stack>
-        <WalletTab coin={coin}/>
+        <WalletTab coin={thisAccount.coin}/>
     </Card>
 }
 

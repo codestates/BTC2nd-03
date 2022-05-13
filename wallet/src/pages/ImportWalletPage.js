@@ -25,7 +25,7 @@ const ImportWalletPage = () => {
         console.log(walletInfo);
         
         //setWallet(walletInfo);
-        SetStorageByBrowserType("address",walletInfo);
+        SetStorageByBrowserType("account",{account1:walletInfo});
 
         navigate('/wallet');
       }

@@ -16,7 +16,7 @@ const AccountMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(1);
 
-  const {coin} = useContext(InfoContext);
+  const {account, thisAccount} = useContext(InfoContext);
   const open = Boolean(anchorEl);
   const handleClickListItem = (event) => {
     setAnchorEl(event.currentTarget);
@@ -46,7 +46,7 @@ const AccountMenu = () => {
         }}
       >
         {options.map((option, index) => (
-          index ==0 ? <MyAccountList coin={coin}/> :
+          index ==0 ? <MyAccountList accountList={account}/> :
           <MenuItem
             key={option}
             onClick={(event) => handleMenuItemClick(event, index)}
@@ -60,7 +60,7 @@ const AccountMenu = () => {
   );
 }
 
-const MyAccountList = ({coin})=> {
+const MyAccountList = ({accountList})=> {
     const [open, setOpen] = useState(true);
     const [accountSelectedIndex, setAccountSelectedIndex] = useState(0);
 
@@ -82,14 +82,14 @@ const MyAccountList = ({coin})=> {
       </ListSubheader>
     }
     >
-      {options.map((option, index) => (
-        <ListItemButton selected={index === accountSelectedIndex} onClick={(event)=>handleListItemClick(event,index)}>
+      {Object.keys(accountList).map((account, index) => (
+        <ListItemButton key={`account-${index}`} selected={index === accountSelectedIndex} onClick={(event)=>handleListItemClick(event,index)}>
             <Stack direction={'row'} alignItems={'center'}>
                 <div style={index === accountSelectedIndex ? {visibility:'visible'} :{visibility:'hidden'}}><CheckIcon style={{color:'green'}}/></div>
-                <Avatar style={{margin:'0 10px'}}>H</Avatar>
+                <Avatar style={{margin:'0 10px'}}>{account}</Avatar>
                 <Stack >
-                    <ListItemText primary="Sent mail" />
-                    <Typography variant='body2'>{coin.matic} MATIC</Typography>
+                    <ListItemText primary={account} />
+                    <Typography variant='body2' component={'div'}>{accountList[account].coin.matic} MATIC</Typography>
                 </Stack>
             </Stack>
         </ListItemButton>

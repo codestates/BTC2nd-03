@@ -27,7 +27,7 @@ function WelcomePage() {
     }
   }
   useEffect(()=>{
-    GetStorageByBrowserType('address');
+    GetStorageByBrowserType('account');
   },[])
 
   return (

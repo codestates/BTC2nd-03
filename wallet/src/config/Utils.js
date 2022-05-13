@@ -30,3 +30,13 @@ export const transBalance = (balance) => {
     }
     return Number(balance).toFixed(4);
 }
+
+
+/*
+{
+    account:{
+        account1 : {address, keystore},
+        account2 : {address, keystore}
+    }
+}
+*/

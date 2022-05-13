@@ -4,7 +4,7 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { InfoContext } from "../store/InfoContext";
 import { createWallet } from "../api/WalletApi";
-
+import {SetStorageByBrowserType} from "../config/Utils";
 const ViewMnemonicPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -22,17 +22,21 @@ const ViewMnemonicPage = () => {
       password: info.password,
     };
     console.log(formData);
-    const { data, status } = await createWallet(formData);
+    
+    const {data, status} = await createWallet(formData).catch((err)=>{console.log(err)});
     if (status === 200) {
-      console.log(data.data);
-      //ToDo:: extension 저장로직
-      /*global chrome*/
-      //chrome.storage.local.set({"address":test},function(){ console.log("saved ok"); } );
-      navigate("/wallet");
+      const {data:walletInfo} = data;
+      console.log(walletInfo);
+      
+      //setWallet(walletInfo);
+      SetStorageByBrowserType("account",{account1:walletInfo});
+
+      navigate('/wallet');
     }
     if (status !== 200) {
       console.error(data);
     }
+    
   };
   return (
     <Container style={{ marginTop: "2%", marginLeft: "25%" }}>

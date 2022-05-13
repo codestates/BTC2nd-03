@@ -15,15 +15,19 @@ import MoreMenu from '../components/wallet/MoreMenu';
 import TokenItem from '../components/coin/TokenItem';
 const WalletPage = () => {
     const navigate = useNavigate();
-    const [address, setAddress] = useState({address:"",keystore:""});
     // const [matic, setMatic] = useState({matic:"0", wei:"0"})
-    const {coin, setCoin} = useContext(InfoContext);   
+    const {setAccount, thisAccount, setThisAccount} = useContext(InfoContext);   
 
-    const getCoinBalance = async (getAddress) => {
-        const {data, status} = await getBalance(getAddress.address).catch((err)=> {console.log(err)});
+    const getCoinBalance = async (accountList, account) => {
+        const {data, status} = await getBalance(accountList[account].address).catch((err)=> {console.log(err)});
         if(status === 200) {
             const {data:balance} = data;
-            setCoin(balance)
+            accountList[account]['coin'] = balance;
+            setAccount(accountList);
+            setThisAccount({
+                ...accountList[account],
+                coin:balance
+            });
         }
     };
 
@@ -32,38 +36,37 @@ const WalletPage = () => {
             /*global chrome*/
             chrome.storage.local.get([key],function(result){
               console.log(result);
-              if(result[key]) {
-                  console.log(result[key])
-                setAddress(result[key]);
-                getCoinBalance(result[key]);
+              const accountList = result[key];
+              if(accountList) {
+                  console.log(accountList)
+                  getCoinBalance(accountList, 'account1');
               }
              
             });
         } else {
-            const getAddress = sessionStorage.getItem(key);
-            console.log(getAddress);
-            if(getAddress) {
-                const parseAddress = JSON.parse(getAddress);
-                setAddress(parseAddress);
-                getCoinBalance(parseAddress);
+            const getAccount = sessionStorage.getItem(key);
+            console.log(getAccount);
+            if(getAccount) {
+                const parseAccount = JSON.parse(getAccount);
+                setAccount(parseAccount);
+                getCoinBalance(parseAccount, 'account1');
             }
         }
     }
 
     useEffect(()=> {
-        GetStorageByBrowserType('address');
+        GetStorageByBrowserType('account');
     },[])
-
     return <Card variant="outlined" style={{padding:10}}>
         <Stack alignItems="left" spacing={3}>
             <WalletHeader/>
         </Stack>
         <Divider style={{margin:'10px 0'}}/>
-        <WalletAccount address={address}/>
+        <WalletAccount account={thisAccount}/>
         <Divider style={{margin:'10px 0'}}/>
         <Stack alignItems="center" spacing={2}>
             <Avatar src="/matic.png"></Avatar>
-            <Typography variant='h4' component="div">{transBalance(coin.matic)} MATIC</Typography>
+            <Typography variant='h4' component="div">{transBalance(thisAccount.coin.matic)} MATIC</Typography>
             <Stack direction={"row"} spacing={5}>
                 <Stack spacing={1} alignItems="center">
                     <Fab size="small" color="secondary" aria-label="send" onClick={()=>navigate("/wallet/transfer-token")}>
@@ -97,7 +100,7 @@ const TabPanel = (props) => {
     );
   }
 
-const WalletAccount = ({address}) => {
+const WalletAccount = ({account}) => {
     const copyAddressRef = useRef();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -120,7 +123,7 @@ const WalletAccount = ({address}) => {
             <Stack alignItems={"center"}>
                 <Typography variant='body1' component="div">Account 1</Typography>
                 <Button aria-describedby={id} variant='text' onClick={handleClick} >
-                    <TextField id="address" variant="standard" size="small" disabled inputRef={copyAddressRef} value={address.address} />
+                    <TextField id="address" variant="standard" size="small" disabled inputRef={copyAddressRef} value={account.address} />
                     <ContentCopyIcon fontSize='small' style={{margin:'0 5px'}}/>
                 </Button>
             
@@ -148,7 +151,7 @@ const WalletAccount = ({address}) => {
 const WalletTab = () => {
     const navigate = useNavigate();
     const [value, setValue] = React.useState(0);
-    const {coin, setCoin} = useContext(InfoContext);
+    const {thisAccount, setThisAccount} = useContext(InfoContext);
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
@@ -164,7 +167,7 @@ const WalletTab = () => {
         <List style={{padding:0}}>
           <ListItem style={{padding:'10px 0'}} secondaryAction={<ArrowForwardIosIcon/>}>
             <ListItemButton onClick={()=>navigate(`/wallet/token/MATIC`)} >
-              <TokenItem name={"MATIC"} value ={coin.matic}/>
+              <TokenItem name={"MATIC"} value ={thisAccount.coin.matic}/>
             </ListItemButton>
           </ListItem>
           <Divider/>

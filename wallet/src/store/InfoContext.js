@@ -5,11 +5,15 @@ export const InfoContext = createContext({
         password:"",
         checkPassword: "",
     },
-    coin: {
-        matic:"0"
+    account: {},
+    thisAccount:{
+        address:"", 
+        keystore:"", 
+        coin:{matic:"0"}
     },
     setInfo: (info) => {},
-    setCoin: (coin) => {}
+    setAccount: (account) => {},
+    setThisAccount: (thisAccount) => {},
 });
 
 // export const CoinContext = createContext({
@@ -18,12 +22,14 @@ export const InfoContext = createContext({
 
 const InfoContextProvider = ({children})=>{
     const [info, setInfo] = useState({password:"",checkPassword: ""});
-    const [coin, setCoin] = useState({coin: {matic:"0"}});
+    const [account, setAccount] = useState({account:{}});
+    const [thisAccount, setThisAccount] = useState({address:"", keystore:"", coin:{matic:"0"}})
 
     const setPasswordHandler = (info) => setInfo(info);
-    const setCoinHandler = (coin) => setCoin(coin);
+    const setAccountHandler = (account) => setAccount(account);
+    const setThisAccountHandler = (thisAccount) => setThisAccount(thisAccount);
     return (
-        <InfoContext.Provider value={{info: info, setInfo: setPasswordHandler, coin:coin, setCoin:setCoinHandler}}>
+        <InfoContext.Provider value={{info: info, setInfo: setPasswordHandler, account:account, setAccount:setAccountHandler, thisAccount:thisAccount, setThisAccount:setThisAccountHandler}}>
             {children}
         </InfoContext.Provider>
     );

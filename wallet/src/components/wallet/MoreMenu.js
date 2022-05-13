@@ -49,7 +49,6 @@ const MoreMenu = () => {
     {options.map((option, index) => (
         <MenuItem
             key={option}
-            selected={index === selectedIndex}
             onClick={(event) => handleMenuItemClick(event, index)}
             style={{padding:15}}
         >

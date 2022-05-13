@@ -2,10 +2,10 @@
 
 ## RolyPoly Wallet 
 
-Type: Non-custodial/HD
-Private Key Storage: User’s local browser storage
-Communication to Ethereum Ledger: Infura
-Private key encoding: Mnemonic
+- Type: Non-custodial/HD
+- Private Key Storage: User’s local browser storage
+- Communication to Ethereum Ledger: Infura
+- Private key encoding: Mnemonic
 
 ### Feature
 

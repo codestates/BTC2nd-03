@@ -23,14 +23,11 @@ const ImportWalletPage = () => {
       if (status === 200) {
         const {data:walletInfo} = data;
         console.log(walletInfo);
-        
+        SetStorageByBrowserType("mnemonic",values.mnemonic);
         //setWallet(walletInfo);
         SetStorageByBrowserType("account",{account1:walletInfo});
 
         navigate('/wallet');
-      }
-      if (status !== 200) {
-        console.error(data);
       }
     }
 

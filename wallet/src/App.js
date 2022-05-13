@@ -10,9 +10,6 @@ import AddTokenPage from "./pages/AddTokenPage";
 import TransferTokenPage from "./pages/TransferTokenPage";
 import TokenDetailPage from "./pages/TokenDetailPage";
 import InfoContextProvider from "./store/InfoContext";
-import MainPage from "./scan/MainPage";
-import TxnHashPage from "./scan/TxnHashPage";
-import BlockPage from "./scan/BlockPage";
 
 function App() {
   return (
@@ -35,9 +32,6 @@ function App() {
               <Route path="transfer-token" element={<TransferTokenPage />} />
               <Route path="token/:token_name" element={<TokenDetailPage />} />
             </Route>
-            <Route path="mainpage" element={<MainPage />} />
-            <Route path="txnhash" element={<TxnHashPage />} />
-            <Route path="block" element={<BlockPage />} />
           </Route>
         </Routes>
       </Router>

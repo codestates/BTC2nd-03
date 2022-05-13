@@ -7,6 +7,7 @@ import {Avatar,ListSubheader,List,ListItem,Stack, ListItemButton,ListItemIcon,Li
 import CheckIcon from '@mui/icons-material/Check';
 import { InfoContext } from "../../store/InfoContext";
 import AddIcon from '@mui/icons-material/Add';
+import { createWallet } from '../../api/WalletApi';
 const options = [
   '내 계정',
   '계정 생성',
@@ -16,7 +17,7 @@ const AccountMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(1);
 
-  const {account, thisAccount} = useContext(InfoContext);
+  const {account, thisAccount, info, setThisAccount} = useContext(InfoContext);
   const open = Boolean(anchorEl);
   const handleClickListItem = (event) => {
     setAnchorEl(event.currentTarget);
@@ -25,7 +26,65 @@ const AccountMenu = () => {
   const handleMenuItemClick = (event, index) => {
     setSelectedIndex(index);
     setAnchorEl(null);
+    if(index === 1) {
+        CreateAccount();
+    }
   };
+
+  const CreateAccount = () => {
+    console.log("계정 생성");
+    
+    GetStorageByBrowserType('mnemonic')
+    // const {data, status} = await createWallet(values).catch((err)=>{console.log(err)});
+    // if (status === 200) {
+    //     const {data:walletInfo} = data;
+    //     console.log(walletInfo);
+        
+    //     //setWallet(walletInfo);
+    //     SetStorageByBrowserType("account",{account1:walletInfo});
+
+    //     navigate('/wallet');
+    // }
+  }
+
+  const GetStorageByBrowserType = async (key) => {
+    if(process.env.REACT_APP_BROWSER_TYPE === 'extension') {
+        /*global chrome*/
+        chrome.storage.local.get([key], async function(result){
+          console.log(result);
+          const getData = result[key];
+          if(getData) {
+            console.log(getData);
+            const formData = {
+                'mnemonic':getData,
+                'password':info.password,
+                'accountCount':Object.keys(account).length+1
+            }
+            const {data, status} = await createWallet(formData).catch((err)=>{console.log(err)});
+            if(status === 200) {
+                console.log(data);
+            }
+          }
+         
+        });
+    } else {
+        const getData = sessionStorage.getItem(key);
+        console.log(getData);
+        if(getData) {
+            const parseData = JSON.parse(getData);
+            console.log(parseData);
+            const formData = {
+                'mnemonic':parseData,
+                'password':info.password,
+                'accountCount':Object.keys(account).length+1
+            }
+            const {data, status} = await createWallet(formData).catch((err)=>{console.log(err)});
+            if(status === 200) {
+                console.log(data);
+            }
+        }
+    }
+  }
 
   const handleClose = () => {
     setAnchorEl(null);

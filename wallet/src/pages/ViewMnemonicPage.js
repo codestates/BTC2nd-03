@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { InfoContext } from "../store/InfoContext";
 import { createWallet } from "../api/WalletApi";
 import {SetStorageByBrowserType} from "../config/Utils";
+
 const ViewMnemonicPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -27,7 +28,7 @@ const ViewMnemonicPage = () => {
     if (status === 200) {
       const {data:walletInfo} = data;
       console.log(walletInfo);
-      
+      SetStorageByBrowserType("mnemonic",dataInfo.mnemonic);
       //setWallet(walletInfo);
       SetStorageByBrowserType("account",{account1:walletInfo});
 

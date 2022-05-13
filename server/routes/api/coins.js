@@ -35,9 +35,47 @@ router.get("/balance/:account", async (req, res, next) => {
   }
 });
 
-router.get('/transaction/:transactionId', async (req, res, next) => {  
+router.get('/test', async (req, res, next) => {  
 
-  const transactionId = req.params.transactionId;
+  const transactionId = req.query.id;
+
+  console.log("current transactionId (Info function) : ", transactionId);
+
+  try {
+    const rpcURL = "https://rpc-mumbai.matic.today";
+    const web3 = new Web3(new Web3.providers.HttpProvider(rpcURL));
+
+    //const transactionId = "0x9a4889b34231687395d319c2d930629d07da5818cd4f35a6e91e613bdcb4347c";  //Transaction Hash
+
+    let transactionInfo = await web3.eth.getTransaction(transactionId);
+
+    console.log("Returened Transaction Info : ", transactionInfo);
+
+    res
+      .status(200)
+      .json({
+        status: "OK",
+        status_code: 200,
+        data: { transactionInfo },
+        message: "success",
+      });
+    }catch(err)
+   {
+      console.log(err);
+      res.status(200).json(
+      { 
+        'status':'FAIL',
+        'status_code':400,
+        'data': "",
+        'message': err.toString()
+      });
+   }
+  
+});  
+
+router.get('/transaction', async (req, res, next) => {  
+
+  const transactionId = req.query.id;
 
   console.log("current transactionId (Info function) : ", transactionId);
 

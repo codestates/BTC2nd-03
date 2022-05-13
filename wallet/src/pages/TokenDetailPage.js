@@ -98,7 +98,7 @@ const WalletTab = ({coin}) => {
           <Divider/>
           <ListItem style={{padding:'10px 0'}}>
             <ListItemButton>
-            <TokenItem name={"USDT"}/>
+            <TokenItem name={"USDT"} img="usdt"/>
             </ListItemButton>
           </ListItem>
         </List>

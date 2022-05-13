@@ -44,15 +44,13 @@ const CreatewalletPage = () => {
     
     if (status === 200) {
       const {data:mnemonicData} = data;
+      SetStorageByBrowserType("mnemonic",values.mnemonic);
+      SetStorageByBrowserType("account",{account1:walletInfo});
 
-    const { data, status } = await createMnemonic(formData).catch((err) =>
-      console.log(err)
-    );
-    if (status === 200) {
-      const { data: mnemonicData } = data;
+      navigate('/viewmnemonicpage',{state:mnemonicData});
     }
+    
   };
-  }
   return (
     <Container style={{ marginTop: "2%", marginLeft: "25%" }}>
       <img src="/logo_2.png" alt="no img" width="190px" height="60px" />

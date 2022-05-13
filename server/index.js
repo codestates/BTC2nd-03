@@ -7,10 +7,9 @@ const dotenv = require('dotenv');
 const cors = require("cors");
 
 dotenv.config();
-//const cors = require('cors');
-const serverRouter= require('./routes/route_handle');
-const walletRouter = require('./routes/wallet/index');
-const tokenRouter = require('./routes/coin/index');
+// const serverRouter= require('./routes/route_handle');
+// const walletRouter = require('./routes/wallet/index');
+// const tokenRouter = require('./routes/coin/index');
 
 const app = express();
 app.set('port', process.env.PORT ||5005);
@@ -47,10 +46,7 @@ app.get('/',(req,res)=>
 { res.send('Test : Server is working  !! <h1> Test Wallet </h1>');});
 
 
-app.use('/test',serverRouter);
-app.use('/api', walletRouter);
-
-app.use('/coin', tokenRouter);
+app.use(require('./routes'));
 
 
 app.use((req, res, next) => {

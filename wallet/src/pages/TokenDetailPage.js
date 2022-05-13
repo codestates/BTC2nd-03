@@ -29,7 +29,7 @@ const TokenDetailPage = () => {
         <Divider style={{margin:'10px 0'}}/>
         <Stack alignItems="center" spacing={3}>
             <Avatar src="/matic.png"></Avatar>
-            <Typography variant='h4' component="p">{transBalance(coin.matic)} MATIC</Typography>
+            <Typography variant='h4' component="div">{transBalance(coin.matic)} MATIC</Typography>
             <Stack direction={"row"} spacing={5}>
                 <Stack spacing={1} alignItems="center">
                     <Fab size="small" color="secondary" aria-label="send" onClick={()=>navigate("/wallet/transfer-token")}>
@@ -103,7 +103,7 @@ const WalletTab = ({coin}) => {
         <Divider style={{margin:'25px 0'}}/>
         <Stack alignItems={"center"}>
             <div/>
-            <Typography variant='body2' component="p">토큰이 보이지 않나요?</Typography>
+            <Typography variant='body2' component="div">토큰이 보이지 않나요?</Typography>
             <Button variant='text' onClick={()=>{navigate('/wallet/add-token')}}>토큰 가져오기</Button>
         </Stack>
     </TabPanel>

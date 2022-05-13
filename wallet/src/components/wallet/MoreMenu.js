@@ -9,6 +9,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 const options = [
   'Roly-Poly Scan에서 계정 보기',
+  '보기 확장'
 ];
 
 const MoreMenu = () => {
@@ -18,10 +19,14 @@ const MoreMenu = () => {
   const handleClickListItem = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
-  const handleMenuItemClick = (event, index) => {
+  /*global chrome*/
+  const handleMenuItemClick = async (event, index) => {
     setSelectedIndex(index);
     setAnchorEl(null);
+    if(index === 1) {
+        let url = chrome.runtime.getURL("index.html");
+        let tab = await chrome.tabs.create({ url });
+    }
   };
 
   const handleClose = () => {
@@ -43,11 +48,12 @@ const MoreMenu = () => {
     >
     {options.map((option, index) => (
         <MenuItem
-        key={option}
-        selected={index === selectedIndex}
-        onClick={(event) => handleMenuItemClick(event, index)}
+            key={option}
+            selected={index === selectedIndex}
+            onClick={(event) => handleMenuItemClick(event, index)}
+            style={{padding:15}}
         >
-        <OpenInNewIcon style={{padding:'0 5px'}}/>{option}
+        {index === 0 &&<OpenInNewIcon style={{padding:'0 10px 0 0'}}/>}{option}
         </MenuItem>
     ))}
     </Menu>

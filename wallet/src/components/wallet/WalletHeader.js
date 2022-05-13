@@ -2,6 +2,7 @@ import React,{ useState } from 'react';
 import {Stack,Avatar,Button, Dialog, DialogTitle,} from "@mui/material";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import AccountMenu from './AccountMenu';
 
 const SimpleDialog = (props) => {
     const { onClose, selectedValue, open } = props;
@@ -45,7 +46,7 @@ const WalletHeader = () => {
                             open={open}
                             onClose={handleClose}
                         />
-                        <Avatar>H</Avatar>
+                        <AccountMenu/>
                     </Stack>
                 </Stack>
             </Stack>

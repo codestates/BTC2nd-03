@@ -64,12 +64,12 @@ const CreatewalletPage = () => {
           <ArrowBackIosNewIcon fontSize="4px" sx={{ marginRight: "5px" }} />
           뒤로가기
         </Button>
-        <Typography variant="h3" component="p">
+        <Typography variant="h3" component="div">
           비밀번호 만들기
         </Typography>
       </Stack>
       <Stack spacing={1} marginTop={5}>
-        <Typography variant="body2" component="p">
+        <Typography variant="body2" component="div">
           새 비밀번호(8자 이상)
         </Typography>
         <TextField
@@ -82,7 +82,7 @@ const CreatewalletPage = () => {
         />
       </Stack>
       <Stack spacing={1} marginTop={3}>
-        <Typography variant="body2" component="p">
+        <Typography variant="body2" component="div">
           비밀번호 확인
         </Typography>
         <TextField

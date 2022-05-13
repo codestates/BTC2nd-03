@@ -13,8 +13,11 @@ export const GetStorageByBrowserType = (key) => {
     if(process.env.REACT_APP_BROWSER_TYPE === 'extension') {
         let data = '';
         /*global chrome*/
-        chrome.storage.local.get([key],function(result){console.log(result); data =result;});
-        console.log('data',data);
+        chrome.storage.local.get([key],function(result){
+            console.log(result[key]); 
+            data = result[key];
+        });
+        // console.log('data',data);
         return data;
     } else {
         return JSON.parse(sessionStorage.getItem(key));

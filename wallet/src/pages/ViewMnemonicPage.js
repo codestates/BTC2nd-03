@@ -50,15 +50,15 @@ const ViewMnemonicPage = () => {
           <ArrowBackIosNewIcon fontSize="4px" sx={{ marginRight: "5px" }} />
           뒤로가기
         </Button>
-        <Typography variant="h3" component="p">
+        <Typography variant="h3" component="div">
           비밀 복구 구문
         </Typography>
-        <Typography variant="body2" component="p">
+        <Typography variant="body2" component="div">
           비밀 백업 구문을 이용하면 계정을 쉽게 백업하고 복구할 수 있습니다.
         </Typography>
         <Typography
           variant="body2"
-          component="p"
+          component="div"
           sx={{ whiteSpace: "pre-wrap" }}
         >
           경고: 비밀 복구 구문은 절대로 공개하지 마세요.

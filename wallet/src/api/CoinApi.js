@@ -14,7 +14,7 @@ export const transfer = (data) => {
 }
 
 export const getTransaction = (id) => {
-    return RolyPolyApi.post(`${URL}/transaction/${id}`);
+    return RolyPolyApi.post(`${URL}/test?id=${id}`);
 }
 
 export const fromWei = (amount) => {

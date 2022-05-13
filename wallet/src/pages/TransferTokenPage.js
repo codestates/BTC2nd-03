@@ -4,10 +4,13 @@ import { transfer } from '../api/CoinApi';
 import { InfoContext } from '../store/InfoContext';
 import { useNavigate } from "react-router-dom";
 import WalletHeader from '../components/wallet/WalletHeader';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const TransferTokenPage = () => {
     const navigate = useNavigate();
     const {account,thisAccount} = useContext(InfoContext);
+    const [open, setOpen] = React.useState(false);
     const [values, setValues] = useState({
       receiver: '',
       token_sign:'MATIC',
@@ -19,7 +22,13 @@ const TransferTokenPage = () => {
     //     "matic_amount":"0.001",
     //     "private_key":"50d017a0e93263b277d335a4671742146d4f374305ef0c0e9bac4cab3456aaa8"
     // }
-
+    const handleClose = () => {
+        setOpen(false);
+      };
+      const handleToggle = () => {
+        setOpen(!open);
+      };
+    
     const SetStorageByBrowserType = (key, transactionHash) => {
         if(process.env.REACT_APP_BROWSER_TYPE === 'extension') {
             /*global chrome*/
@@ -52,6 +61,7 @@ const TransferTokenPage = () => {
     }
 
     const onSubmit = async () => {
+        handleToggle();
         const formData = {
             sender:thisAccount.address,
             receiver:values.receiver,
@@ -60,7 +70,7 @@ const TransferTokenPage = () => {
         };
         console.log(formData);
 
-      const {data, status} = await transfer(formData).catch((err)=>alert(err));
+      const {data, status} = await transfer(formData).catch((err)=>alert(err)).finally(()=>handleClose());
       if (status === 200) {
         const {data:{receipt}} = data;
         console.log(receipt.transactionHash);
@@ -124,6 +134,13 @@ const TransferTokenPage = () => {
                 </Button>
             </Stack>
         </Stack>
+        <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+        onClick={handleClose}
+        >
+        <CircularProgress color="inherit" />
+        </Backdrop>
     </Card>
     </Stack>
 </div>

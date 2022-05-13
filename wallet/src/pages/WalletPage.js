@@ -13,7 +13,7 @@ import { transBalance } from '../config/Utils';
 import { InfoContext } from "../store/InfoContext";
 import MoreMenu from '../components/wallet/MoreMenu';
 import TokenItem from '../components/coin/TokenItem';
-
+// import { getTransactions } from '../api/Web3Api';
 const WalletPage = () => {
     const navigate = useNavigate();
     // const [matic, setMatic] = useState({matic:"0", wei:"0"})
@@ -217,7 +217,7 @@ const WalletTab = () => {
           <Divider/>
           <ListItem style={{padding:'10px 0'}} secondaryAction={<ArrowForwardIosIcon/>}>
             <ListItemButton onClick={()=>navigate(`/wallet/token/USDT`)} >
-            <TokenItem name={"USDT"}/>
+            <TokenItem name={"USDT"} img="usdt"/>
             </ListItemButton>
           </ListItem>
         </List>

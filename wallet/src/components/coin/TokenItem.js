@@ -2,10 +2,10 @@ import React from 'react';
 import {  Stack,Avatar,Typography} from "@mui/material";
 import { transBalance } from '../../config/Utils';
 
-const TokenItem = ({name,value=0}) => {
+const TokenItem = ({name,img='matic',value=0}) => {
     return <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
     <Stack direction={"row"} >
-        <Avatar src="/matic.png"/>
+        <Avatar src={`/${img}.png`}/>
         <div style={{padding:'0 10px'}}/>
         <Stack>
             <Typography variant='body2'>{transBalance(value)} {name}</Typography>

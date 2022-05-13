@@ -1,0 +1,24 @@
+{
+  "name": "RolyPoly Wallet",
+  "description": "Roly Poly Wallet for building interactive Chrome extensions",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "/static/js/background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Open the popup",
+    "default_icon": "logo.png"
+  },  
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage"
+  ],
+  "icons": {
+      "16": "logo192.png",
+      "48": "logo192.png",
+      "128": "logo192.png"
+  }
+}

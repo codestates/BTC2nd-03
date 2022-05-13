@@ -4,11 +4,12 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const dotenv = require('dotenv');
+const cors = require("cors");
 
 dotenv.config();
-//const cors = require('cors');
-const serverRouter= require('./routes/route_handle');
-const walletRouter = require('./routes/wallet/index');
+// const serverRouter= require('./routes/route_handle');
+// const walletRouter = require('./routes/wallet/index');
+// const tokenRouter = require('./routes/coin/index');
 
 const app = express();
 app.set('port', process.env.PORT ||5005);
@@ -22,6 +23,7 @@ const sessionMiddleware = session({
   },
 });
 
+app.use(cors());
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -44,8 +46,8 @@ app.get('/',(req,res)=>
 { res.send('Test : Server is working  !! <h1> Test Wallet </h1>');});
 
 
-app.use('/test',serverRouter);
-app.use('/wallet', walletRouter);
+app.use(require('./routes'));
+
 
 app.use((req, res, next) => {
   const error =  new Error(`[APP] ${req.method} ${req.url} - no router.`);

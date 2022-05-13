@@ -44,9 +44,7 @@ const CreatewalletPage = () => {
     
     if (status === 200) {
       const {data:mnemonicData} = data;
-      SetStorageByBrowserType("mnemonic",values.mnemonic);
-      SetStorageByBrowserType("account",{account1:walletInfo});
-
+      
       navigate('/viewmnemonicpage',{state:mnemonicData});
     }
     

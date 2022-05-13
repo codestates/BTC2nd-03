@@ -494,7 +494,7 @@
 
 [8] getBlockInfo
  
- 1) http method : post
+ 1) http method : get
  2) request url : http://localhost:5005/coin/getBlockInfo/[BlockNumber]
  3) request and response 예시
    3-1) request 

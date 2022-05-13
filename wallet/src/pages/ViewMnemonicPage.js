@@ -4,6 +4,7 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { InfoContext } from "../store/InfoContext";
 import { createWallet } from "../api/WalletApi";
+import {SetStorageByBrowserType} from "../config/Utils";
 
 const ViewMnemonicPage = () => {
   const navigate = useNavigate();
@@ -22,17 +23,21 @@ const ViewMnemonicPage = () => {
       password: info.password,
     };
     console.log(formData);
-    const { data, status } = await createWallet(formData);
+    
+    const {data, status} = await createWallet(formData).catch((err)=>{console.log(err)});
     if (status === 200) {
-      console.log(data.data);
-      //ToDo:: extension 저장로직
-      /*global chrome*/
-      //chrome.storage.local.set({"address":test},function(){ console.log("saved ok"); } );
-      navigate("/wallet");
+      const {data:walletInfo} = data;
+      console.log(walletInfo);
+      SetStorageByBrowserType("mnemonic",dataInfo.mnemonic);
+      //setWallet(walletInfo);
+      SetStorageByBrowserType("account",{account1:walletInfo});
+
+      navigate('/wallet');
     }
     if (status !== 200) {
       console.error(data);
     }
+    
   };
   return (
     <Container style={{ marginTop: "2%", marginLeft: "25%" }}>
@@ -50,15 +55,15 @@ const ViewMnemonicPage = () => {
           <ArrowBackIosNewIcon fontSize="4px" sx={{ marginRight: "5px" }} />
           뒤로가기
         </Button>
-        <Typography variant="h3" component="p">
+        <Typography variant="h3" component="div">
           비밀 복구 구문
         </Typography>
-        <Typography variant="body2" component="p">
+        <Typography variant="body2" component="div">
           비밀 백업 구문을 이용하면 계정을 쉽게 백업하고 복구할 수 있습니다.
         </Typography>
         <Typography
           variant="body2"
-          component="p"
+          component="div"
           sx={{ whiteSpace: "pre-wrap" }}
         >
           경고: 비밀 복구 구문은 절대로 공개하지 마세요.

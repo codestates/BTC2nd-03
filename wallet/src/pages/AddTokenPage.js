@@ -39,6 +39,7 @@ const AddTokenPage = () => {
     return <div style={{padding:10}}>
     <WalletHeader/>
     <Stack alignItems={"center"}>
+    <div style={{padding:'15px 0'}}/>
     <Card maxWidth="sm" style={{width:400, height:600}}>
         <Stack alignItems="left" spacing={3} style={{margin:15}} >
         <Stack direction={'row'} justifyContent="space-between" alignItems="flex-start">

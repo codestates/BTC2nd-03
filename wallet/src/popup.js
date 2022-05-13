@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './popup.css';
 import reportWebVitals from './reportWebVitals';
-import WalletPage from './pages/WalletPage';
+import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('popup-root'));
 root.render(
   <React.StrictMode>
-    <WalletPage />
+  <div style={{width:400, height:600}}>
+    <App/>
+  </div>
   </React.StrictMode>
 );
 

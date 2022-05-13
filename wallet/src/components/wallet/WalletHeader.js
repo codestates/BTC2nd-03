@@ -1,9 +1,12 @@
 import React,{ useState } from 'react';
 import {Stack,Avatar,Button, Dialog, DialogTitle,} from "@mui/material";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import AccountMenu from './AccountMenu';
 
 const SimpleDialog = (props) => {
     const { onClose, selectedValue, open } = props;
+
     const handleClose = () => {
         onClose(selectedValue);
       };
@@ -19,7 +22,7 @@ const SimpleDialog = (props) => {
 const WalletHeader = () => {
     const [open, setOpen] = useState(false);
     const [selectedValue, setSelectedValue] = useState(1);
-  
+    const matches = useMediaQuery('(min-width:650px)');
     const handleClickOpen = () => {
       setOpen(true);
     };
@@ -30,7 +33,7 @@ const WalletHeader = () => {
     };
 
     return <Stack direction={"row"} justifyContent={"space-between"}>
-                <img src="/logo_2.png" alt="no img" width="190px" height="60px" />
+                {matches ? <img src="/logo_2.png" alt="no img" width="190px" height="60px" /> : <img src="/logo.png" alt="no img" width="60px" height="60px" />}
                 <Stack alignItems="center" justifyContent={"center"}>
                     <Stack direction={"row"}>
                         <Button variant="outlined" onClick={handleClickOpen} style={{margin:0,padding:'0 5px 0 10px'}}>
@@ -43,7 +46,7 @@ const WalletHeader = () => {
                             open={open}
                             onClose={handleClose}
                         />
-                        <Avatar>H</Avatar>
+                        <AccountMenu/>
                     </Stack>
                 </Stack>
             </Stack>

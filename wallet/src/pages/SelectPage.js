@@ -8,7 +8,7 @@ const SelectPage = () => {
     <Container style={{ marginTop: "2%" }}>
       <img src="/logo_2.png" alt="no img" width="190px" height="60px" />
       <Grid container sx={{ justifyContent: "center", marginTop: "60px" }}>
-        <Typography variant="h5" component="p">
+        <Typography variant="h5" component="div">
           roly-poly가 처음이세요?
         </Typography>
       </Grid>
@@ -23,11 +23,11 @@ const SelectPage = () => {
           <Paper elevation={3} sx={{ borderRadius: "10px" }}>
             <Box padding={5} sx={{ textAlign: "center" }}>
               <GetApp fontSize="large" />
-              <Typography variant="h6" component="p">
+              <Typography variant="h6" component="div">
                 아니요. 이미 비밀 복구 구문이 있습니다.
               </Typography>
               <Box paddingTop={1} paddingBottom={5}>
-                <Typography variant="body2" component="p">
+                <Typography variant="body2" component="div">
                   비밀 복구 구문을 사용하여 기존 지갑 가져오기
                 </Typography>
               </Box>
@@ -46,11 +46,11 @@ const SelectPage = () => {
           <Paper elevation={3} sx={{ borderRadius: "20px" }}>
             <Box padding={5} sx={{ textAlign: "center" }}>
               <Add fontSize="large" />
-              <Typography variant="h6" component="p">
+              <Typography variant="h6" component="div">
                 설정을 시작하죠!
               </Typography>
               <Box paddingTop={1} paddingBottom={5}>
-                <Typography variant="body2" component="p">
+                <Typography variant="body2" component="div">
                   지갑 생성을 하면 새 지갑과 비밀 복구 구문이 만들어집니다.
                 </Typography>
               </Box>

@@ -90,6 +90,56 @@ router.post('/import', async(req,res) => {
   }
 });
 
+router.post('/test', async(req, res) => {
+  let password = req.body.password;
+  let mnemonic = req.body.mnemonic;
+  let data_address =  req.body.data_address;
+
+
+  try {
+    //lightwallet.keystore.createVault(
+    lightwallet.keystore.createVault(    
+      {
+        password: password,
+        seedPhrase: mnemonic,
+        hdPathString: "m/0'/0'/0'"
+      },
+      function (err, ks) {
+        ks.keyFromPassword(password, function (err, pwDerivedKey) {
+          ks.generateNewAddress(pwDerivedKey, 1);
+          console.log("[0] pwDerivedKey : ",pwDerivedKey);
+
+          let address = (ks.getAddresses()).toString();
+          let keystore = ks.serialize();
+          
+          console.log("[1] keystore : ",keystore);
+          console.log("[2] address : ",address);
+
+          let private_key = ks.exportPrivateKey(data_address, pwDerivedKey);
+          console.log("[3] exportPrivateKey : ",private_key);
+
+          res.status(200).json(
+          { 'status':'OK',
+                'status_code':200,
+                'data': { keystore: keystore, address: address, private_key:private_key },
+                'message':'success' 
+          });
+
+        });
+      }
+    );
+  } catch (exception) {
+    console.log("NewWallet ==>>>> " + exception);
+    res.status(200).json(
+      { 'status':'FAIL',
+        'status_code':400,
+        'data': "",
+        'message': exception.toString()
+      });
+  }
+
+});
+
 //니모닉 코드와 패스워드를 이용해 keystore와 address를 생성합니다.
 router.post('/', async(req, res) => {
     let password = req.body.password;
@@ -122,11 +172,14 @@ router.post('/', async(req, res) => {
             console.log("[1] keystore : ",keystore);
             console.log("[2] address : ",address);
 
-            //res.json({ keystore: keystore, address: address });
+            const addressFirst = address.split(',',1);
+            const privateKey = ks.exportPrivateKey(addressFirst[0], pwDerivedKey);
+            console.log("[3] exportPrivateKey : ",privateKey);
+
             res.status(200).json(
             { 'status':'OK',
                   'status_code':200,
-                  'data': { keystore: keystore, address: address },
+                  'data': { keystore: keystore, address: address, privateKey:privateKey },
                   'message':'success' 
             });
 

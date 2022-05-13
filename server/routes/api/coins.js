@@ -41,7 +41,7 @@ router.get('/balance/:account', async (req, res, next) => {
   
 
 
-router.get('/getTransactionInfo/:transactionId', async (req, res, next) => {  
+router.get('/transaction/:transactionId', async (req, res, next) => {  
   const transactionId = req.params.transactionId;
 
   console.log("current transactionId (Info function) : ",transactionId);
@@ -82,7 +82,7 @@ router.get('/getTransactionInfo/:transactionId', async (req, res, next) => {
 });  
 
 
-router.get('/getTransactionReceipt/:transactionId', async (req, res, next) => {  
+router.get('/transaction_receipt/:transactionId', async (req, res, next) => {  
     const transactionId = req.params.transactionId;
 
     console.log("current transactionId (Receipt function) : ",transactionId);
@@ -156,22 +156,36 @@ router.post('/createAccount', async (req, res, next) => {
 });
 
 
+router.get('/from_wei/:amount', async (req, res, next) => {
+  const amount=req.params.amount; //sender account address
 
+  const rpcURL = "https://rpc-mumbai.matic.today";
+  const web3= new Web3(new Web3.providers.HttpProvider(rpcURL));
+
+  const fromWei = web3.utils.fromWei(amount);
+  console.log("matic amount : ",fromWei);
+
+  res.status(200).json(
+    { 'status':'OK',
+      'status_code':200,
+      'data': { matic:fromWei },
+      'message':'success' 
+    });
+});
 //
-
 router.post('/transfer', async (req, res, next) => {  
 
   console.log("transfer request requested--");
 
   const sender=req.body.sender; //sender account address
-  const receiver=req.body.sender; //receiver account address
+  const receiver=req.body.receiver; //receiver account address
   const matic_amount=req.body.matic_amount;  //amount : Matic (unit)
   const private_key=req.body.private_key;
 
-  console.log("sender : ",sender);
-  console.log("receiver : ",receiver);
-  console.log("matic_amount : ",matic_amount);
-  console.log("private_key : ",private_key);
+  console.log("sender : ", sender);
+  console.log("receiver : ", receiver);
+  console.log("matic_amount : ", matic_amount);
+  console.log("private_key : ", private_key);
   
   try { 
     

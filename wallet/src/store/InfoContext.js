@@ -8,7 +8,8 @@ export const InfoContext = createContext({
     account: {},
     thisAccount:{
         address:"", 
-        keystore:"", 
+        keystore:"",
+        private_key:"", 
         coin:{matic:"0"}
     },
     setInfo: (info) => {},
@@ -23,7 +24,7 @@ export const InfoContext = createContext({
 const InfoContextProvider = ({children})=>{
     const [info, setInfo] = useState({password:"",checkPassword: ""});
     const [account, setAccount] = useState({account:{}});
-    const [thisAccount, setThisAccount] = useState({address:"", keystore:"", coin:{matic:"0"}})
+    const [thisAccount, setThisAccount] = useState({address:"", keystore:"",private_key:"", coin:{matic:"0"}})
 
     const setPasswordHandler = (info) => setInfo(info);
     const setAccountHandler = (account) => setAccount(account);

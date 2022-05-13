@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import URL from '../../config/URL';
 const options = [
   'Roly-Poly Scan에서 계정 보기',
   '보기 확장'
@@ -23,6 +24,9 @@ const MoreMenu = () => {
   const handleMenuItemClick = async (event, index) => {
     setSelectedIndex(index);
     setAnchorEl(null);
+    if(index === 0) {
+        window.open(URL.ROLY_POLY_SCAN);
+    }
     if(index === 1) {
         let url = chrome.runtime.getURL("index.html");
         let tab = await chrome.tabs.create({ url });

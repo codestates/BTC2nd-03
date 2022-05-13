@@ -35,16 +35,6 @@ const AccountMenu = () => {
     console.log("계정 생성");
     
     GetStorageByBrowserType('mnemonic')
-    // const {data, status} = await createWallet(values).catch((err)=>{console.log(err)});
-    // if (status === 200) {
-    //     const {data:walletInfo} = data;
-    //     console.log(walletInfo);
-        
-    //     //setWallet(walletInfo);
-    //     SetStorageByBrowserType("account",{account1:walletInfo});
-
-    //     navigate('/wallet');
-    // }
   }
 
   const GetStorageByBrowserType = async (key) => {
@@ -73,6 +63,9 @@ const AccountMenu = () => {
         if(getData) {
             const parseData = JSON.parse(getData);
             console.log(parseData);
+            const test = JSON.parse(sessionStorage.getItem('account'));
+            console.log(test['account1']['keystore']);
+
             const formData = {
                 'mnemonic':parseData,
                 'password':info.password,

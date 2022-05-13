@@ -1,35 +1,74 @@
 import React,{useState,useContext} from 'react';
 import { IconButton, OutlinedInput,Alert, InputLabel,Card,InputAdornment, Button, Stack, Typography, TextField,FormControl, Divider  } from "@mui/material";
-import {Visibility,VisibilityOff } from "@mui/icons-material";
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { transfer } from '../api/CoinApi';
+import { InfoContext } from '../store/InfoContext';
 import { useNavigate } from "react-router-dom";
-import {createWallet} from "../api/WalletApi";
-import {SetStorageByBrowserType} from "../config/Utils";
-import { WalletContext } from "../store/InfoContext";
 import WalletHeader from '../components/wallet/WalletHeader';
-import ClearIcon from '@mui/icons-material/Clear';
+
 const TransferTokenPage = () => {
     const navigate = useNavigate();
+    const {account,thisAccount} = useContext(InfoContext);
     const [values, setValues] = useState({
-      token_address: '',
-      token_sign: '',
-      token_decimal: 0,
+      receiver: '',
+      token_sign:'MATIC',
+      matic_amount: 0,
     });
-    
-    const onSubmit = async () => {
-    //   const {data, status} = await createWallet(values);
-    //   if (status === 200) {
-    //     const {data:walletInfo} = data;
-    //     console.log(walletInfo);
-        
-    //     //setWallet(walletInfo);
-    //     SetStorageByBrowserType("address",walletInfo);
+    // {
+    //     "sender":"0x12ee8bac9da9fdde7958d705851403a26903ffa3",
+    //     "receiver":"0x235162cb33da9565e7c05e0c8bb071f8d43b55ff",
+    //     "matic_amount":"0.001",
+    //     "private_key":"50d017a0e93263b277d335a4671742146d4f374305ef0c0e9bac4cab3456aaa8"
+    // }
 
-    //     navigate('/wallet');
-    //   }
-    //   if (status !== 200) {
-    //     console.error(data);
-    //   }
+    const SetStorageByBrowserType = (key, transactionHash) => {
+        if(process.env.REACT_APP_BROWSER_TYPE === 'extension') {
+            /*global chrome*/
+            chrome.storage.local.get([key],function(result){
+              const getTransaction = result[key];
+              let data = {};
+              console.log(getTransaction)
+              if(getTransaction) {
+                getTransaction.push(transactionHash);
+                data[key] = getTransaction;
+                /*global chrome*/
+                chrome.storage.local.set(data,function(){ console.log("saved ok"); } );
+              } else{
+                data[key] = [transactionHash];
+                /*global chrome*/
+                chrome.storage.local.set(data,function(){ console.log("saved ok"); } );
+            }
+            });
+        } else {
+            const getTransaction = sessionStorage.getItem(key);
+            console.log(getTransaction);
+            if(getTransaction) {
+                const test = JSON.parse(getTransaction)
+                test.push(transactionHash);
+                sessionStorage.setItem(key, JSON.stringify(test));
+            } else {
+                sessionStorage.setItem(key, JSON.stringify([transactionHash]));
+            }
+        }
+    }
+
+    const onSubmit = async () => {
+        const formData = {
+            sender:thisAccount.address,
+            receiver:values.receiver,
+            matic_amount:values.matic_amount,
+            private_key:account['account1'].privateKey
+        };
+        console.log(formData);
+
+      const {data, status} = await transfer(formData).catch((err)=>alert(err));
+      if (status === 200) {
+        const {data:{receipt}} = data;
+        console.log(receipt.transactionHash);
+        SetStorageByBrowserType('transaction',receipt.transactionHash);
+
+        
+        navigate('/wallet');
+      }
     }
 
     const handleChange = (prop) => (event) => {
@@ -44,13 +83,13 @@ const TransferTokenPage = () => {
             <Typography variant="h5">보내기</Typography>
         {/* <Alert severity="warning">기존 토큰의 가짜 버전 생성을 포함하여 누구나 토큰을 생성할 수 있습니다. </Alert> */}
         <FormControl sx={{ m: 1}} variant="outlined">
-            <InputLabel htmlFor="filled-adornment-token_address">주소</InputLabel>
+            <InputLabel htmlFor="filled-adornment-receiver">보낼 주소</InputLabel>
             <OutlinedInput
-            id="token_address"
+            id="receiver"
             type={'text'}
-            value={values.token_address}
-            onChange={handleChange('token_address')}
-            label="TokenAddress"
+            value={values.receiver}
+            onChange={handleChange('receiver')}
+            label="Receiver"
             />
         </FormControl>
         <FormControl sx={{ m: 1}} variant="outlined">
@@ -64,13 +103,14 @@ const TransferTokenPage = () => {
             />
         </FormControl>
         <FormControl sx={{ m: 1}} variant="outlined">
-            <InputLabel htmlFor="filled-adornment-token_decimal">금액</InputLabel>
+            <InputLabel htmlFor="filled-adornment-matic_amount">금액</InputLabel>
             <OutlinedInput
-            id="token_decimal"
+            id="matic_amount"
             type="number"
-            value={values.token_decimal}
-            onChange={handleChange('token_decimal')}
-            label="TokenDecimal"
+            value={values.matic_amount}
+            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} 
+            onChange={handleChange('matic_amount')}
+            label="Amount"
             />
         </FormControl>
         <div style={{padding:"30px 0"}}/>

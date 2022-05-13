@@ -1,5 +1,4 @@
 import {RolyPolyApi} from "../config/Ajax";
-
 const URL = '/api/coins';
 
 export const createMnemonic = (data) => {
@@ -8,4 +7,16 @@ export const createMnemonic = (data) => {
 
 export const getBalance = (address) => {
     return RolyPolyApi.get(`${URL}/balance/${address}`);
+}
+
+export const transfer = (data) => {
+    return RolyPolyApi.post(`${URL}/transfer`,data);
+}
+
+export const getTransaction = (id) => {
+    return RolyPolyApi.post(`${URL}/transaction/${id}`);
+}
+
+export const fromWei = (amount) => {
+    return RolyPolyApi.post(`${URL}/from_wei/${amount}`);
 }

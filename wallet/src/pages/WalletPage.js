@@ -1,5 +1,5 @@
 import React,{useEffect, useState, useContext, useRef} from 'react';
-import { Card, Stack,Avatar, Button,Divider,TextField, Typography, Fab, Tabs, Tab, Box,Popover,List , ListItem, ListItemButton   } from "@mui/material";
+import { Card, Stack,Avatar, Button,Divider,TextField, Typography, Fab, Tabs, Tab, Box,Popover,List , ListItem, ListItemButton,ListItemText } from "@mui/material";
 import {Visibility,VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import {createWallet} from "../api/WalletApi";
@@ -8,11 +8,12 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import CallMadeIcon from '@mui/icons-material/CallMade';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import WalletHeader from '../components/wallet/WalletHeader';
-import { getBalance } from '../api/CoinApi';
+import { getBalance, getTransaction } from '../api/CoinApi';
 import { transBalance } from '../config/Utils';
 import { InfoContext } from "../store/InfoContext";
 import MoreMenu from '../components/wallet/MoreMenu';
 import TokenItem from '../components/coin/TokenItem';
+
 const WalletPage = () => {
     const navigate = useNavigate();
     // const [matic, setMatic] = useState({matic:"0", wei:"0"})
@@ -151,10 +152,53 @@ const WalletAccount = ({account}) => {
 const WalletTab = () => {
     const navigate = useNavigate();
     const [value, setValue] = React.useState(0);
+    const [transaction, setTransaction] = useState([]);
     const {thisAccount, setThisAccount} = useContext(InfoContext);
     const handleChange = (event, newValue) => {
+    console.log(newValue);
       setValue(newValue);
+      if(newValue === 1) {
+        GetTransactionInfo();
+      }
     };
+
+    const GetStorageByBrowserType = (key) => {
+        if(process.env.REACT_APP_BROWSER_TYPE === 'extension') {
+            /*global chrome*/
+            chrome.storage.local.get([key],function(result){
+              console.log(result);
+              const getTransactionByStroage = result[key];
+              if(getTransactionByStroage) {
+                const test = getTransactionByStroage.map(async(item)=>{
+                    const {data,status} = await getTransaction(item).catch(err=>console.log(err));
+                    if(status === 200) {
+                        console.log(data);
+                    }
+                })
+                
+                // setTransaction(getTransaction);
+              }
+             
+            });
+        } else {
+            const getTransactionByStroage = sessionStorage.getItem(key);
+            console.log(getTransactionByStroage);
+            if(getTransactionByStroage) {
+                const parseTransaction = JSON.parse(getTransactionByStroage);
+                const test = parseTransaction.map(async(item)=>{
+                    const {data,status} = await getTransaction(item).catch(err=>console.log(err));
+                    if(status === 200) {
+                        console.log(data);
+                    }
+                })
+                // setTransaction(parseTransaction);
+            }
+        }
+    }
+    const GetTransactionInfo = () => {
+        GetStorageByBrowserType('transaction');
+
+    }
 
     return <Box sx={{ width: '100%' }}>
     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -185,7 +229,21 @@ const WalletTab = () => {
         </Stack>
     </TabPanel>
     <TabPanel value={value} index={1}>
-        Item Two
+        {console.log(transaction)}
+        <List component="div" aria-labelledby="nested-list-subheader">
+        {transaction.map((account, index) => (
+        <ListItemButton key={`account-${index}`}>
+            <Stack direction={'row'} alignItems={'center'}>
+                <Avatar style={{margin:'0 10px'}}>보내기</Avatar>
+                <Stack >
+                    <ListItemText primary='test' />
+                    <Typography variant='body2' component={'div'}>MATIC</Typography>
+                </Stack>
+            </Stack>
+        </ListItemButton>
+      ))}
+
+  </List>
     </TabPanel>
 </Box>
 }

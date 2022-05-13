@@ -23,7 +23,7 @@ function App() {
               path="import-with-seed-pharse"
               element={<ImportWalletPage />}
             />
-            
+
             <Route path="createwalletpage" element={<CreateWalletPage />} />
             <Route path="viewmnemonicpage" element={<ViewMnemonicPage />} />
             <Route path="wallet/*">

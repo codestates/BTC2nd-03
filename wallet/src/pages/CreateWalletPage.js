@@ -41,6 +41,7 @@ const CreatewalletPage = () => {
     formData.append("password", info.password);
     formData.append("checkPassword", info.checkPassword);
     const {data, status} = await createMnemonic(formData).catch((err)=>console.log(err));
+    
     if (status === 200) {
       const {data:mnemonicData} = data;
 
